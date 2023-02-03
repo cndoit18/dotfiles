@@ -1,6 +1,6 @@
 # github.com/cndoit18/dotfiles
 
-Tom Payne's dotfiles, managed with [`chezmoi`](https://github.com/twpayne/chezmoi).
+Cndoit18's dotfiles, managed with [`chezmoi`](https://github.com/twpayne/chezmoi).
 
 Install them with:
 
