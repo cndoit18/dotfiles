@@ -1,6 +1,7 @@
 [user]
     name = cndoit18
     email = cndoit18@outlook.com
+    signingkey = {{ onepasswordRead "op://Personal/SSH Key/public_key" }}
 {{- if eq .chezmoi.os "darwin" }}
 [credential]
     helper = osxkeychain
@@ -20,5 +21,11 @@
 [mergetool]
     prompt = false
     keepBackup = false
+{{- if eq .chezmoi.os "darwin" }}
+[gpg]
+    format = ssh
+[gpg "ssh"]
+    program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+{{- end }}
 [commit]
     gpgsign = true
