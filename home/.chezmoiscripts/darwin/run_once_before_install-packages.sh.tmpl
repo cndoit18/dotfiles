@@ -1,0 +1,44 @@
+#!/bin/bash
+
+if [ ! "$(command -v brew)" ]; then
+    eval "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+brew bundle --no-lock --file=/dev/stdin <<EOF
+brew "macvim"
+brew "fzf"
+brew "mercurial"
+brew "go"
+brew "pyenv"
+brew "pipx"
+brew "cmake"
+brew "java"
+brew "envchain"
+brew "ccls"
+brew "ctags"
+brew "git"
+brew "git-lfs"
+brew "gpg"
+brew "clang-format"
+brew "shfmt"
+brew "chezmoi"
+
+cask "1password/tap/1password-cli"
+cask "iterm2"
+EOF
+
+test -d ${HOME}/.gvm || eval "$(curl -fsSL https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)"
+
+python_stable_version="$(pyenv install --list | sed 's/^  //' | grep '^\d' | grep --invert-match 'dev\|a\|b' | tail -1)"
+PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install -s $python_stable_version && pyenv global $python_stable_version
+
+pipx install poetry >& /dev/null
+pipx install yapf >& /dev/null
+pipx runpip yapf install toml >& /dev/null
+
+test -d ${HOME}/.nvm || eval "$(curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh)"
+. ${HOME}/.nvm/nvm.sh
+
+nvm install --lts --default
+corepack enable
+corepack prepare yarn@stable --activate

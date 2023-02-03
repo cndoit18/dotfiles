@@ -1,0 +1,162 @@
+call plug#begin()
+
+Plug 'preservim/nerdtree'
+Plug 'tpope/vim-commentary'
+Plug 'sainnhe/gruvbox-material'
+Plug 'tpope/vim-unimpaired'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'vim-airline/vim-airline'
+Plug 'preservim/tagbar'
+Plug 'jmcantrell/vim-virtualenv'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+" Also add Glaive, which is used to configure codefmt's maktaba flags. See
+" `:help :Glaive` for usage.
+Plug 'google/vim-glaive'
+
+" Go tools
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+call plug#end()
+
+call glaive#Install()
+
+set number
+set wildmenu
+set wildmode=full
+
+set nocompatible
+set showcmd
+set hidden
+set mouse=a
+filetype plugin on
+
+syntax enable
+
+" ==========================================================
+" Tagbar
+" ==========================================================
+
+nmap <leader>t :TagbarToggle<CR>
+let g:tagbar_autofocus = 1
+
+" Special Tagbar settings for go
+let g:tagbar_type_go = {
+			\ 'ctagstype' : 'go',
+			\ 'kinds'     : [
+			\ 'p:package',
+			\ 'i:imports:1',
+			\ 'c:constants',
+			\ 'v:variables',
+			\ 't:types',
+			\ 'n:interfaces',
+			\ 'w:fields',
+			\ 'e:embedded',
+			\ 'm:methods',
+			\ 'r:constructor',
+			\ 'f:functions'
+			\ ],
+			\ 'sro' : '.',
+			\ 'kind2scope' : {
+			\ 't' : 'ctype',
+			\ 'n' : 'ntype'
+			\ },
+			\ 'scope2kind' : {
+			\ 'ctype' : 't',
+			\ 'ntype' : 'n'
+			\ },
+			\ 'ctagsbin'  : 'gotags',
+			\ 'ctagsargs' : '-sort -silent'
+			\ }
+
+
+
+" ==========================================================
+" Theme
+" ==========================================================
+
+
+set background=dark
+let g:gruvbox_material_background = 'soft'
+let g:gruvbox_material_better_performance = 1
+let g:gruvbox_material_transparent_background = 1
+let g:gruvbox_material_diagnostic_line_highlight = 1
+let g:gruvbox_material_disable_italic_comment = 1
+
+colorscheme gruvbox-material
+
+" automatically install coc extensions if they're missing
+let g:coc_global_extensions=['coc-go', 'coc-pyright', 'coc-snippets',
+			\ 'coc-highlight', 'coc-yaml', 'coc-vimlsp',
+			\ 'coc-json', 'coc-sh', 'coc-tsserver']
+
+
+" ==========================================================
+" Airline
+" ==========================================================
+
+
+let g:airline_theme = 'gruvbox_material'
+
+
+" ==========================================================
+" Coc.nvim
+" ==========================================================
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+	if CocAction('hasProvider', 'hover')
+		call CocActionAsync('doHover')
+	else
+		call feedkeys('K', 'in')
+	endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+nmap <leader>n :NERDTreeToggle<CR>
+
+
+" ==========================================================
+" CodeFmt
+" ==========================================================
+
+augroup autoformat_settings
+  autocmd FileType bzl AutoFormatBuffer buildifier
+  autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
+  autocmd FileType dart AutoFormatBuffer dartfmt
+  autocmd FileType go AutoFormatBuffer gofmt
+  autocmd FileType gn AutoFormatBuffer gn
+  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+  autocmd FileType java AutoFormatBuffer google-java-format
+  autocmd FileType python AutoFormatBuffer yapf
+  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+  autocmd FileType rust AutoFormatBuffer rustfmt
+  autocmd FileType vue AutoFormatBuffer prettier
+  autocmd FileType swift AutoFormatBuffer swift-format
+augroup END

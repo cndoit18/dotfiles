@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# .vimrc hash: {{ include "dot_vimrc" | sha256sum }}
+
+vim -E +PlugUpdate! +PlugClean! +qa! || true

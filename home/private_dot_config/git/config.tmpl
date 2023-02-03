@@ -1,0 +1,24 @@
+[user]
+    name = cndoit18
+    email = cndoit18@outlook.com
+{{- if eq .chezmoi.os "darwin" }}
+[credential]
+    helper = osxkeychain
+{{- end }}
+[filter "lfs"]
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+[init]
+    defaultBranch = master
+[pull]
+    rebase = true
+[merge]
+    tool = vimdiff
+    conflictstyle = diff3
+[mergetool]
+    prompt = false
+    keepBackup = false
+[commit]
+    gpgsign = true

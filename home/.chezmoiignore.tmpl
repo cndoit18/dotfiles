@@ -1,0 +1,16 @@
+.oh-my-zsh/cache/**
+.oh-my-zsh/custom/themes/powerlevel10k/**/*.zwc
+
+{{ if ne .chezmoi.os "darwin" }}
+.chezmoiscripts/darwin/**
+.hammerspoon
+Library/**
+{{ end }}
+
+{{ if ne .chezmoi.os "linux" }}
+.chezmoiscripts/linux/**
+.hushlogin
+.local/share/fonts
+.config/pypoetry
+{{ end }}
+
