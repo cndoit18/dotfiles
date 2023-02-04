@@ -4,7 +4,12 @@ if [ ! "$(command -v brew)" ]; then
     eval "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
+brew update-reset && brew update
+
 brew bundle --no-lock --file=/dev/stdin <<EOF
+
+tap "homebrew/cask"
+
 brew "macvim"
 brew "fzf"
 brew "mercurial"
@@ -41,7 +46,6 @@ cask "wechat"
 cask "feishu"
 cask "slack"
 cask "dingtalk"
-
 
 EOF
 
