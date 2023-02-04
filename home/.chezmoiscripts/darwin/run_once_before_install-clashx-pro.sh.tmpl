@@ -1,0 +1,12 @@
+#!/bin/bash
+
+[ -f ClashX.dmg ] || curl -fsSL \
+    $(
+        curl -fsSL https://install.appcenter.ms/api/v0.1/apps/clashx/clashx-pro/distribution_groups/public/releases/latest\?is_install_page\=true |
+            sed -r 's/.+download_url\":\"([^\"]+).*/\1/'
+    ) --output ClashX.dmg
+
+hdiutil attach ClashX.dmg
+sudo cp -R /Volumes/ClashX\ Pro/ClashX\ Pro.app /Applications
+hdiutil detach /Volumes/ClashX\ Pro
+rm -rf ClashX.dmg
