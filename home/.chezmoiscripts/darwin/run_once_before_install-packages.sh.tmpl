@@ -40,7 +40,6 @@ cask "visual-studio-code"
 cask "rancher"
 cask "qqmusic"
 cask "vlc"
-cask "virtualbox"
 cask "rectangle"
 
 cask "qq"
@@ -51,7 +50,7 @@ cask "dingtalk"
 
 EOF
 
-test -d ${HOME}/.gvm || eval "$(curl -fsSL https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)"
+test -d ${HOME}/.gvm || /bin/bash <(curl -fsSL https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 
 python_stable_version="$(pyenv install --list | sed 's/^  //' | grep '^\d' | grep --invert-match 'dev\|a\|b' | tail -1)"
 PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install -s $python_stable_version && pyenv global $python_stable_version
@@ -60,9 +59,10 @@ pipx install poetry >& /dev/null
 pipx install yapf >& /dev/null
 pipx runpip yapf install toml >& /dev/null
 
-test -d ${HOME}/.nvm || eval "$(curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh)"
+test -d ${HOME}/.nvm || /bin/bash <(curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh)
 . ${HOME}/.nvm/nvm.sh
 
+test -d ${HOME}/.zplug || /bin/zsh <(curl -fsSL https://raw.githubusercontent.com/zplug/installer/master/installer.zsh)
 nvm install --lts --default
 corepack enable
 corepack prepare yarn@stable --activate
