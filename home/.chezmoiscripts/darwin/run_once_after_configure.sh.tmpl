@@ -4,3 +4,11 @@ defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "${HOME}/.c
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
 defaults write com.west2online.ClashXPro autoEnableTun -int 1
+
+cd "$HOME/.oh-my-zsh" \
+    && git init \
+    && git add . \
+    && git commit -m "Initial commit" \
+    && git remote add origin "git@github.com:ohmyzsh/ohmyzsh.git" \
+    && git fetch --all \
+    && git reset --hard origin/master
