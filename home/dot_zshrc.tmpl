@@ -154,3 +154,5 @@ export PATH="$HOME/.rd/bin:$PATH"
 {{- if eq .chezmoi.os "darwin" }}
 export PATH="$(brew --prefix openssl)/bin:$PATH"
 {{- end }}
+
+export PATH="$(go env GOPATH)/bin:$PATH"
