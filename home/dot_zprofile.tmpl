@@ -6,3 +6,5 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 fpath+=("$(/usr/local/bin/brew --prefix)/share/zsh/site-functions")
 eval "$(/usr/local/bin/brew shellenv)"
 {{ end -}}
+# Added by OrbStack: command-line tools and integration
+[ -f ${HOME}/.orbstack/shell/init.zsh ] && source ${HOME}/.orbstack/shell/init.zsh 2>/dev/null
