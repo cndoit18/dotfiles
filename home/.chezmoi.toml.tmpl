@@ -1,5 +1,15 @@
-[scriptEnv]
-   UV_VERSION  = "0.6.7"
-
 [hooks.read-source-state.pre]
     command = ".local/share/chezmoi/home/.install-prerequisites.sh"
+
+[data]
+    zshPlugins = [
+        "zsh-syntax-highlighting",
+	"extract",
+	"git",
+	"golang",
+	"python",
+	{{- if eq .chezmoi.os "darwin" }}
+	"brew",
+	{{- end }}
+	"git-open",
+    ]
