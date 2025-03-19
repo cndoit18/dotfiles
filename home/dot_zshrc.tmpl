@@ -56,6 +56,16 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+# User configuration
+
+{{- if lookPath "eza" }}
+alias ls='eza --icons=auto'
+{{- end }}
+
+{{- if lookPath "nvim" }}
+alias vi=nvim
+export EDITOR=nvim
+{{- end }}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
