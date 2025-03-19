@@ -4,6 +4,7 @@ local config = {}
 config = {
 	-- color scheme can be found here: https://github.com/mbadolato/iTerm2-Color-Schemes/tree/master/wezterm
 	color_scheme = "Solarized Dark (Gogh)",
+	font = wezterm.font("DroidSansM Nerd Font"),
 	enable_tab_bar = true,
 	use_fancy_tab_bar = true,
 	hide_tab_bar_if_only_one_tab = true,

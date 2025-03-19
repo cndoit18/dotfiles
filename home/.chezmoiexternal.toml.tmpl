@@ -1,3 +1,19 @@
+{{-   $fontDir := "" }}
+{{-   if eq .chezmoi.os "darwin" }}
+{{-     $fontDir = "Library/Fonts" }}
+{{-   else if eq .chezmoi.os "linux" }}
+{{-     $fontDir = ".local/share/fonts" }}
+{{-   end }}
+["{{ $fontDir }}/DroidSansMono"]
+    type = "archive"
+    url = "https://github.com/ryanoasis/nerd-fonts/releases/download/{{ (gitHubLatestRelease "ryanoasis/nerd-fonts").TagName }}/DroidSansMono.tar.xz"
+    refreshPeriod = "168h"
+    exact = true
+    stripComponents = 0
+    include = [
+        "*.otf",
+    ]
+
 [".oh-my-zsh"]
     type = "archive"
     url = "https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz"

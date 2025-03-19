@@ -14,7 +14,7 @@ fi
 {{- $paths := list }}
 {{- $homeDir := .chezmoi.homeDir }}
 {{- range $_, $relPath := list "bin" "go/bin" ".cargo/bin" ".local/bin" }}
-{{    $path := joinPath $homeDir $relPath }}
+{{-   $path := joinPath $homeDir $relPath }}
 {{-   if stat $path }}
 {{-     $paths = mustAppend $paths $path }}
 {{-   end }}
@@ -63,9 +63,13 @@ alias ls='eza --icons=auto'
 {{- end }}
 
 {{- if lookPath "nvim" }}
-alias vi=nvim
 export EDITOR=nvim
+alias vi=nvim
+alias vimdiff='nvim -d'
 {{- end }}
+
+export GITHUB_ACCESS_TOKEN={{ onepasswordRead "op://Personal/GitHub API Token/token" | trim }}
+[[ ! -f ~/.config/op/plugins.sh ]] || source ~/.config/op/plugins.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
