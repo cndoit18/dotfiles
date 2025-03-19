@@ -1,3 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 
-curl -LsSf "https://astral.sh/uv/{{ (gitHubLatestRelease "astral-sh/uv").TagName }}/install.sh" | sh
+GVM_NO_UPDATE_PROFILE=1 bash < <(curl -LsSf 'https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer')
+[ -f ~/.gvm/scripts/gvm ] && source ~/.gvm/scripts/gvm
+gvm install go1.21.0 -B && gvm use go1.21.0 && gvm install go${GO_VERSION} && gvm use go${GO_VERSION} --default
+
+UV_NO_MODIFY_PATH=1 bash < <(curl -LsSf 'https://astral.sh/uv/{{ (gitHubLatestRelease "astral-sh/uv").TagName }}/install.sh')
+[ -f ~/.local/bin/uv ] && ~/.local/bin/uv python install --default --preview ${PYTHON_VERSION}
+
+PROFILE=/dev/null bash < <(curl -LsSf 'https://raw.githubusercontent.com/nvm-sh/nvm/{{ (gitHubLatestRelease "nvm-sh/nvm").TagName }}/install.sh')
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+nvm install --default v${NODE_JS_VERSION}
