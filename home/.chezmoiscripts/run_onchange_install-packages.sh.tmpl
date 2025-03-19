@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# scriptEnv hash: {{ .chezmoi.config.scriptEnv | quote | sha256sum }}
+
 GVM_NO_UPDATE_PROFILE=1 bash < <(curl -LsSf 'https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer')
 [ -f ~/.gvm/scripts/gvm ] && source ~/.gvm/scripts/gvm
 gvm install go1.21.0 -B && gvm use go1.21.0 && gvm install go${GO_VERSION} && gvm use go${GO_VERSION} --default

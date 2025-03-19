@@ -11,9 +11,6 @@ config = {
 	tab_bar_at_bottom = false,
 	use_ime = true,
 	native_macos_fullscreen_mode = true,
-
-	-- https://wezterm.org/config/lua/config/term.html
-	term = "wezterm",
 	window_padding = {
 		left = 0,
 		right = 0,
