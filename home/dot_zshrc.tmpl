@@ -83,4 +83,7 @@ export NVM_DIR="$HOME/.config/nvm"
 [ -f ~/.gvm/scripts/gvm ] && source ~/.gvm/scripts/gvm
 
 source "$HOME/.cargo/env"
+
+{{- if eq .chezmoi.os "darwin" }}
 export DYLD_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_LIBRARY_PATH"
+{{- end }}
