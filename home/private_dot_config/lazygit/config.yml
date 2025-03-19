@@ -5,3 +5,9 @@ customCommands:
     context: "files"
     loadingText: "opening commitizen commit tool"
     subprocess: true
+  - key: "G"
+    command: "git cz ai"
+    description: "generate commit message"
+    context: "files"
+    loadingText: "opening commitizen commit tool"
+    subprocess: true
