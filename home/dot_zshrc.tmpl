@@ -58,6 +58,9 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+{{- if lookPath "bat" }}
+alias cat='bat'
+{{- end }}
 {{- if lookPath "eza" }}
 alias ls='eza --icons=auto'
 {{- end }}
@@ -78,3 +81,6 @@ export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 [ -f ~/.gvm/scripts/gvm ] && source ~/.gvm/scripts/gvm
+
+source "$HOME/.cargo/env"
+export DYLD_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_LIBRARY_PATH"

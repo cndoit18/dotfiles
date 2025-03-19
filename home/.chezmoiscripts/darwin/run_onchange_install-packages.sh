@@ -9,5 +9,6 @@ brew "neovim"
 brew "fzf"
 brew "eza"
 brew "mercurial"
+brew "bat"
 
 EOF

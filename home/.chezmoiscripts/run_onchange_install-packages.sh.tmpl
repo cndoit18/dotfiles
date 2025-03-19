@@ -13,3 +13,5 @@ PROFILE=/dev/null bash < <(curl -LsSf 'https://raw.githubusercontent.com/nvm-sh/
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 nvm install --default v${NODE_JS_VERSION}
+
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
