@@ -1,2 +1,2 @@
 #!/bin/sh
-uvx --from commitizen cz "$@"
+npx czg "$@"
