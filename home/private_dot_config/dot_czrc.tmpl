@@ -63,9 +63,9 @@
     "useEmoji": false,
     "emojiAlign": "center",
     "useAI": false,
-    "openAIToken": {{ onepasswordRead "op://Personal/Deepseek/credential" | trim | quote }},
-    "apiEndpoint": "https://api.deepseek.com",
-    "apiModel": "deepseek-chat",
+    "openAIToken": {{ onepasswordRead "op://Personal/LLM/credential" | trim | quote }},
+    "apiEndpoint": {{ onepasswordRead "op://Personal/LLM/url" | trim | quote }},
+    "apiModel": {{ onepasswordRead "op://Personal/LLM/gpjtgaxoirmlfznm3pvomfvpy4" | trim | quote }},
     "aiNumber": 1,
     "themeColorCode": "",
     "scopes": [
