@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ex
+set -e
 
 case "$(uname -s)" in
 Darwin)
