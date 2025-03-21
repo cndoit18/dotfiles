@@ -11,6 +11,7 @@ local lsp_servers = {
 	"harper_ls",
 	"sqls",
 	"helm_ls",
+	"ts_ls",
 }
 
 return {
