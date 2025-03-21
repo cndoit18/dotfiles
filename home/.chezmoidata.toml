@@ -1,0 +1,4 @@
+[data.softwares]
+go = "1.23.7"
+python = "3.12"
+"node.js" = "22.14.0"

@@ -1,14 +1,14 @@
 #!/bin/bash
 set -e
 
-# softwares hash: {{ .softwares | toString | sha256sum }}
+# softwares hash: {{ .data.softwares | toString | sha256sum }}
 
 [ -f ~/.local/bin/uv ] || UV_NO_MODIFY_PATH=1 bash < <(curl -LsSf 'https://astral.sh/uv/{{ (gitHubLatestRelease "astral-sh/uv").TagName }}/install.sh')
-[ -f ~/.local/bin/uv ] && ~/.local/bin/uv python install --default --preview {{ .softwares.python }}
+~/.local/bin/uv python install --default --preview {{ .data.softwares.python }}
 
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] || PROFILE=/dev/null bash < <(curl -LsSf 'https://raw.githubusercontent.com/nvm-sh/nvm/{{ (gitHubLatestRelease "nvm-sh/nvm").TagName }}/install.sh')
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ "$(command -v node)" ] || nvm install --default v{{ index .softwares "node.js" }}
+nvm install --default v{{ index .data.softwares "node.js" }}
 
 [ "$(command -v rustc)" ] || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path

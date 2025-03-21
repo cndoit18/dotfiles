@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# softwares hash: {{ .softwares | toString | sha256sum }}
+# softwares hash: {{ .data.softwares | toString | sha256sum }}
 
 brew bundle --file=/dev/stdin <<EOF
 
@@ -15,4 +15,5 @@ EOF
 
 [ -f ~/.gvm/scripts/gvm ] || GVM_NO_UPDATE_PROFILE=1 bash < <(curl -LsSf 'https://raw.githubusercontent.com/cndoit18/gvm/master/binscripts/gvm-installer')
 [ -f ~/.gvm/scripts/gvm ] && source ~/.gvm/scripts/gvm
-[ "$(command -v go)" ] || (gvm install go1.21.0 -B && gvm use go1.21.0 && gvm install go{{ .softwares.go }} && gvm use go{{ .softwares.go }} --default)
+[ "$(command -v go)" ] || (gvm install go1.21.0 -B && gvm use go1.21.0)
+gvm install go{{ .data.softwares.go }} && gvm use go{{ .data.softwares.go }} --default
