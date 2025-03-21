@@ -52,6 +52,21 @@ plugins=(
 {{- range .zshPlugins }}
   {{ . }}
 {{- end }}
+  extract
+  git
+  golang
+  python
+  rust
+  fzf
+{{- if lookPath "brew" }}
+  brew
+{{- end }}
+{{- if lookPath "helm" }}
+  helm
+{{- end }}
+{{- if lookPath "kubectl" }}
+  kubectl
+{{- end }}
 )
 
 source $ZSH/oh-my-zsh.sh

@@ -4,15 +4,7 @@ command = ".local/share/chezmoi/home/.install-prerequisites.sh"
 [data]
 zshPlugins = [
     "zsh-syntax-highlighting",
-    "extract",
-    "git",
-    "golang",
-    "python",
-    {{- if eq .chezmoi.os "darwin" }}
-    "brew",
-    {{- end }}
     "git-open",
-    "fzf",
 ]
 
 githubToken = "{{ onepasswordRead "op://Personal/GitHub API Token/token" | trim }}"
