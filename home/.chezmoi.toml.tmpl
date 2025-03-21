@@ -1,21 +1,28 @@
-[scriptEnv]
-    GO_VERSION = "1.23.7"
-    PYTHON_VERSION = "3.12"
-    NODE_JS_VERSION = "22.14.0"
-
 [hooks.read-source-state.pre]
-    command = ".local/share/chezmoi/home/.install-prerequisites.sh"
+command = ".local/share/chezmoi/home/.install-prerequisites.sh"
 
 [data]
-    zshPlugins = [
-        "zsh-syntax-highlighting",
-	"extract",
-	"git",
-	"golang",
-	"python",
-	{{- if eq .chezmoi.os "darwin" }}
-	"brew",
-	{{- end }}
-	"git-open",
-	"fzf",
-    ]
+zshPlugins = [
+    "zsh-syntax-highlighting",
+    "extract",
+    "git",
+    "golang",
+    "python",
+    {{- if eq .chezmoi.os "darwin" }}
+    "brew",
+    {{- end }}
+    "git-open",
+    "fzf",
+]
+
+githubToken = "{{ onepasswordRead "op://Personal/GitHub API Token/token" | trim }}"
+
+[data.ai]
+token = {{ onepasswordRead "op://Personal/LLM/credential" | trim | quote }}
+endpoint = {{ onepasswordRead "op://Personal/LLM/url" | trim | quote }}
+model = {{ onepasswordRead "op://Personal/LLM/gpjtgaxoirmlfznm3pvomfvpy4" | trim | quote }}
+
+[data.softwares]
+go = "1.23.7"
+python = "3.12"
+"node.js" = "22.14.0"

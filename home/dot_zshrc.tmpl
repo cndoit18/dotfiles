@@ -71,7 +71,7 @@ alias vi=nvim
 alias vimdiff='nvim -d'
 {{- end }}
 
-export GITHUB_TOKEN={{ onepasswordRead "op://Personal/GitHub API Token/token" | trim }}
+export GITHUB_TOKEN={{ .githubToken }}
 [[ ! -f ~/.config/op/plugins.sh ]] || source ~/.config/op/plugins.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

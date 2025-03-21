@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# scriptEnv hash: {{ .chezmoi.config.scriptEnv | quote | sha256sum }}
+# softwares hash: {{ .softwares | toString | sha256sum }}
 
 brew bundle --file=/dev/stdin <<EOF
 
@@ -15,4 +15,4 @@ EOF
 
 [ -f ~/.gvm/scripts/gvm ] || GVM_NO_UPDATE_PROFILE=1 bash < <(curl -LsSf 'https://raw.githubusercontent.com/cndoit18/gvm/master/binscripts/gvm-installer')
 [ -f ~/.gvm/scripts/gvm ] && source ~/.gvm/scripts/gvm
-[ "$(command -v go)" ] || (gvm install go1.21.0 -B && gvm use go1.21.0 && gvm install go${GO_VERSION} && gvm use go${GO_VERSION} --default)
+[ "$(command -v go)" ] || (gvm install go1.21.0 -B && gvm use go1.21.0 && gvm install go{{ .softwares.go }} && gvm use go{{ .softwares.go }} --default)

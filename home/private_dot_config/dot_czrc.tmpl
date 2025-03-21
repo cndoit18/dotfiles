@@ -63,9 +63,9 @@
     "useEmoji": false,
     "emojiAlign": "center",
     "useAI": false,
-    "openAIToken": {{ onepasswordRead "op://Personal/LLM/credential" | trim | quote }},
-    "apiEndpoint": {{ onepasswordRead "op://Personal/LLM/url" | trim | quote }},
-    "apiModel": {{ onepasswordRead "op://Personal/LLM/gpjtgaxoirmlfznm3pvomfvpy4" | trim | quote }},
+    "openAIToken": "{{ .ai.token }}",
+    "apiEndpoint": "{{ .ai.endpoint }}",
+    "apiModel": "{{ .ai.model }}",
     "aiNumber": 5,
     "themeColorCode": "",
     "scopes": [
