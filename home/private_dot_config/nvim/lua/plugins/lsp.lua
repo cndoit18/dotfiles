@@ -10,6 +10,7 @@ local lsp_servers = {
 	"yamlls",
 	"harper_ls",
 	"sqls",
+	"helm_ls",
 }
 
 return {
