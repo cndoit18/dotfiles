@@ -13,6 +13,6 @@ brew "bat"
 
 EOF
 
-[ -f ~/.gvm/scripts/gvm ] || GVM_NO_UPDATE_PROFILE=1 bash < <(curl -LsSf 'https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer')
+[ -f ~/.gvm/scripts/gvm ] || GVM_NO_UPDATE_PROFILE=1 bash < <(curl -LsSf 'https://raw.githubusercontent.com/cndoit18/gvm/master/binscripts/gvm-installer')
 [ -f ~/.gvm/scripts/gvm ] && source ~/.gvm/scripts/gvm
-[ "$(command -v go)" ] || (brew install go && gvm install go${GO_VERSION} && brew uninstall go && gvm use go${GO_VERSION} --default)
+[ "$(command -v go)" ] || (gvm install go1.21.0 -B && gvm use go1.21.0 && gvm install go${GO_VERSION} && gvm use go${GO_VERSION} --default)
