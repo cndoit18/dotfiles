@@ -15,3 +15,7 @@
 {{ if ne .chezmoi.os "linux" }}
 .chezmoiscripts/linux/**
 {{ end }}
+
+{{ if not ( lookPath "k6" ) }}
+.oh-my-zsh/completions/_k6.tmpl
+{{ end }}
