@@ -5,6 +5,15 @@ command = ".local/share/chezmoi/home/.install-prerequisites.sh"
 zshPlugins = [
     "zsh-syntax-highlighting",
     "git-open",
+    "extract",
+    "git",
+    "golang",
+    "python",
+    "rust",
+    "fzf",
+    "brew",
+    "helm",
+    "kubectl",
 ]
 
 githubToken = "{{ onepasswordRead "op://Personal/GitHub API Token/token" | trim }}"
