@@ -78,6 +78,9 @@ alias cat='bat'
 {{- if lookPath "eza" }}
 alias ls='eza --icons=auto'
 {{- end }}
+{{- if isExecutable "/usr/local/opt/trash/bin/trash" }}
+alias rm='/usr/local/opt/trash/bin/trash'
+{{- end }}
 
 {{- if lookPath "nvim" }}
 export EDITOR=nvim
