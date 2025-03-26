@@ -66,6 +66,33 @@ module.exports = {
   apiEndpoint: "{{ .ai.endpoint }}",
   apiModel: "{{ .ai.model }}",
   aiNumber: 5,
+  aiQuestionCB: ({
+    maxSubjectLength,
+    upperCaseSubject,
+    diff,
+  }) => `Analyze the provided git diff to generate a concise commit message title that:
+	1. Summarizes the code change in under ${maxSubjectLength} characters
+	2. Follows conventional commit standards
+	3. ${upperCaseSubject ? "Capitalizes the first letter" : "Keeps first letter lowercase"}
+
+	Process steps:
+	1. Identify the main objective of these code changes
+	2. Create a verb-phrase subject line using imperative mood (e.g. "fix" not "fixed")
+	3. Validate length constraint: ${maxSubjectLength} chars max
+
+	Response format:
+	generated_title
+
+	Examples of desired outputs:
+	${upperCaseSubject ? "Add SSL certificate validation" : "add SSL certificate validation"}
+
+	Focus on technical specificity over generic messages. Prioritize code impact visibility.
+
+	### diff
+	"""
+	${diff}
+	"""
+	`,
   themeColorCode: "",
   scopes: [],
   allowCustomScopes: true,
