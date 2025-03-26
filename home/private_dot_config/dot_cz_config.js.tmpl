@@ -65,7 +65,7 @@ module.exports = {
   openAIToken: "{{ .ai.token }}",
   apiEndpoint: "{{ .ai.endpoint }}",
   apiModel: "{{ .ai.model }}",
-  aiNumber: 5,
+  aiNumber: {{ .ai.number }},
   aiQuestionCB: ({
     maxSubjectLength,
     upperCaseSubject,
