@@ -19,6 +19,9 @@ fi
 {{-     $paths = mustAppend $paths $path }}
 {{-   end }}
 {{- end }}
+{{- if isExecutable "/usr/local/opt/trash/bin/trash" }}
+{{-   $paths = mustAppend $paths "/usr/local/opt/trash/bin" }}
+{{- end }}
 {{- if $paths }}
 export PATH={{ toStrings $paths | join ":" }}:$PATH
 {{- end }}
@@ -79,7 +82,7 @@ alias cat='bat'
 alias ls='eza --icons=auto'
 {{- end }}
 {{- if isExecutable "/usr/local/opt/trash/bin/trash" }}
-alias rm='/usr/local/opt/trash/bin/trash'
+alias rm='trash'
 {{- end }}
 
 {{- if lookPath "nvim" }}
