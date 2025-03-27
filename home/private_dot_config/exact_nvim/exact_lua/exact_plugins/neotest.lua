@@ -104,6 +104,12 @@ return {
 				type = "executable",
 				command = vim.fn.stdpath("data") .. "/mason/bin/codelldb",
 			}
+
+			vim.api.nvim_create_user_command("DebugBreakpoint", function()
+				dap.toggle_breakpoint()
+			end, {
+				nargs = "?",
+			})
 		end,
 		dependencies = {
 			{
