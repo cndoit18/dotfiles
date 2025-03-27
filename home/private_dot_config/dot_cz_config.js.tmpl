@@ -77,10 +77,11 @@ module.exports = {
 	4. Excludes conventional commit prefixes like "feature:"
 
 	Process steps:
-	1. Identify the main objective of these code changes
-	2. Create a verb-phrase subject line using imperative mood (e.g. "fix" not "fixed")
-	3. Validate length constraint: ${maxSubjectLength} chars max
-	4. Focus on technical specificity over generic messages. Prioritize code impact visibility.
+	1. Don't have any formatting, just a sentence
+	2. Identify the main objective of these code changes
+	3. Create a verb-phrase subject line using imperative mood (e.g. "fix" not "fixed")
+	4. Validate length constraint: ${maxSubjectLength} chars max
+	5. Focus on technical specificity over generic messages. Prioritize code impact visibility.
 
 	Examples of desired outputs:
 	${upperCaseSubject ? "Add SSL certificate validation" : "add SSL certificate validation"}
