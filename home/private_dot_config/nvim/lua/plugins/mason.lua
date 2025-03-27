@@ -22,6 +22,7 @@ return {
 
 			-- All
 			"ruff",
+			"codelldb",
 		}
 		require("mason").setup()
 		local registry = require("mason-registry")

@@ -7,10 +7,14 @@ return {
 			"antoinemadec/FixCursorHold.nvim",
 			"nvim-treesitter/nvim-treesitter",
 			"nvim-neotest/neotest-go",
+			{ "rouge8/neotest-rust", build = "cargo install cargo-nextest --locked" },
 		},
 		opts = {
 			adapters = {
-				["neotest-go"] = {},
+				["neotest-go"] = {
+					args = { "-coverprofile=" .. vim.fn.getcwd() .. "/coverage.out" },
+				},
+				["neotest-rust"] = {},
 			},
 		},
 		config = function(_, opts)
@@ -39,9 +43,32 @@ return {
 				end
 				opts.adapters = adapters
 			end
-			require("neotest").setup(opts)
+			local neotest = require("neotest")
+			neotest.setup(opts)
+
+			vim.api.nvim_create_user_command("Test", function()
+				neotest.run.run()
+			end, {
+				nargs = "?",
+			})
+			vim.api.nvim_create_user_command("TestFile", function()
+				neotest.run.run(vim.fn.expand("%"))
+			end, {
+				nargs = "?",
+			})
+
+			vim.api.nvim_create_user_command("DebugTest", function()
+				neotest.run.run({ strategy = "dap", suite = false })
+			end, {
+				nargs = "?",
+			})
 		end,
-		cmd = "Neotest",
+		cmd = {
+			"Neotest",
+			"Test",
+			"TestFile",
+			"DebugTest",
+		},
 	},
 	{
 		"mfussenegger/nvim-dap",
@@ -51,7 +78,7 @@ return {
 			-- Requires:
 			-- * You have initialized your module with 'go mod init module_name'.
 			-- * You :cd your project before running DAP.
-			dap.adapters.go = {
+			dap.adapters.delve = {
 				type = "server",
 				port = "${port}",
 				executable = {
@@ -59,6 +86,7 @@ return {
 					args = { "dap", "-l", "127.0.0.1:${port}" },
 				},
 			}
+			dap.adapters.go = dap.adapters.delve
 			dap.configurations.go = {
 				{
 					type = "go",
@@ -72,8 +100,41 @@ return {
 					program = "./${relativeFileDirname}",
 				},
 			}
+			dap.adapters.codelldb = {
+				type = "executable",
+				command = vim.fn.stdpath("data") .. "/mason/bin/codelldb",
+			}
 		end,
 		dependencies = {
+			{
+				"andythigpen/nvim-coverage",
+				version = "*",
+				config = function()
+					local cov = require("coverage")
+					cov.setup({})
+
+					local show_coverage = false
+					vim.api.nvim_create_user_command("CoverageToggle", function()
+						show_coverage = not show_coverage
+						cov.load(show_coverage)
+						if show_coverage then
+							cov.show()
+						else
+							cov.hide()
+						end
+					end, {
+						nargs = "?",
+						desc = "Coverage Toggle",
+					})
+					vim.api.nvim_create_user_command("CoverageSummary", function()
+						cov.load(show_coverage)
+						cov.summary()
+					end, {
+						nargs = "?",
+						desc = "Coverage Summary",
+					})
+				end,
+			},
 			{
 				"rcarriga/nvim-dap-ui",
 				dependencies = "nvim-neotest/nvim-nio",
