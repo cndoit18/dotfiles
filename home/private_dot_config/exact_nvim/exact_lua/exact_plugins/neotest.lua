@@ -105,6 +105,11 @@ return {
 				command = vim.fn.stdpath("data") .. "/mason/bin/codelldb",
 			}
 
+			vim.api.nvim_create_user_command("DebugStart", function()
+				dap.continue()
+			end, {
+				nargs = "?",
+			})
 			vim.api.nvim_create_user_command("DebugBreakpoint", function()
 				dap.toggle_breakpoint()
 			end, {
