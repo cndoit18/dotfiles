@@ -17,6 +17,8 @@ config = {
 		top = 0,
 		bottom = 0,
 	},
+	leader = { key = "b", mods = "CTRL" },
 }
 
+require("wez-tmux.plugin").apply_to_config(config, {})
 return config
