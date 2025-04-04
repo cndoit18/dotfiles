@@ -81,7 +81,7 @@ alias cat='bat'
 {{- if lookPath "eza" }}
 alias ls='eza --icons=auto'
 {{- end }}
-{{- if isExecutable "/usr/local/opt/trash/bin/trash" }}
+{{- if lookPath "trash" }}
 alias rm='trash'
 {{- end }}
 
