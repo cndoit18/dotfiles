@@ -52,6 +52,13 @@
         "*/.gitignore",
     ]
 
+[".oh-my-zsh/custom/plugins/autoswitch_virtualenv"]
+    type = "archive"
+    url = "https://github.com/MichaelAquilina/zsh-autoswitch-virtualenv/archive/master.tar.gz"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
+
 [".oh-my-zsh/custom/themes/powerlevel10k"]
     type = "archive"
     url = "https://github.com/romkatv/powerlevel10k/archive/{{ (gitHubLatestRelease "romkatv/powerlevel10k").TagName }}.tar.gz"
