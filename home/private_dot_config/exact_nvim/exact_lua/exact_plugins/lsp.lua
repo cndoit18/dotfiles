@@ -64,26 +64,30 @@ return {
 		end
 
 		for _, lsp in ipairs(lsp_servers) do
-			lspconfig[lsp].setup({
-				before_init = function(_, config)
-					if lsp == "pyright" then
-						config.settings.python.pythonPath = get_python_path(config.root_dir)
-					end
-					if lsp == "harper_ls" then
-						config.settings["harper-ls"] = {
-							userDictPath = vim.fn.stdpath("data") .. "/user_dict.txt",
-							codeActions = {
-								forceStable = true,
-							},
-						}
-					end
-				end,
+			local config = {
+				settings = {},
 				on_attach = function(client, bufnr)
 					if client and client.server_capabilities.inlayHintProvider then
 						vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 					end
 				end,
-			})
+			}
+			if lsp == "pyright" then
+				config.before_init = function(_, c)
+					c.settings.python.pythonPath = get_python_path(c.root_dir)
+				end
+			end
+
+			if lsp == "harper_ls" then
+				config.settings["harper-ls"] = {
+					userDictPath = vim.fn.stdpath("data") .. "/user_dict.txt",
+					codeActions = {
+						forceStable = true,
+					},
+				}
+			end
+
+			lspconfig[lsp].setup(config)
 		end
 	end,
 }
