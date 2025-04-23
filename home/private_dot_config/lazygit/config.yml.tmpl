@@ -11,3 +11,9 @@ customCommands:
     context: "files"
     loadingText: "opening commitizen commit tool"
     subprocess: true
+{{- if lookPath "delta" }}
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never --line-numbers
+{{- end }}
