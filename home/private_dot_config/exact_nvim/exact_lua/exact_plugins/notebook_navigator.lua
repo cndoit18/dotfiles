@@ -37,6 +37,7 @@ return {
 		-- "akinsho/toggleterm.nvim", -- alternative repl provider
 		-- "benlubas/molten-nvim", -- alternative repl provider
 		-- "anuvyklack/hydra.nvim",
+		{ "GCBallesteros/jupytext.nvim", build = "uv tool install jupytext", config = true, lazy = false },
 	},
 	event = "VeryLazy",
 	config = function()
