@@ -24,12 +24,17 @@ return {
 					config = {
 						scratch_repl = true,
 						repl_definition = {
+							sh = {
+								command = { "zsh" },
+							},
 							python = {
 								command = { "ipython" },
 								format = require("iron.fts.common").bracketed_paste,
+								block_deviders = { "# %%", "#%%" },
 							},
 						},
 						repl_open_cmd = "vertical botright 80 split",
+						ignore_blank_lines = true,
 					},
 				})
 			end,
@@ -70,6 +75,11 @@ return {
 		})
 		vim.api.nvim_create_user_command("RunCellAndMove", function()
 			nn.run_and_move()
+		end, {
+			nargs = "?",
+		})
+		vim.api.nvim_create_user_command("RunAllCell", function()
+			nn.run_all_cells()
 		end, {
 			nargs = "?",
 		})
