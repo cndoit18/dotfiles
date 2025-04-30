@@ -55,7 +55,7 @@ return {
 			local file_name = full_path:match("[^/]+$")
 			-- 构建要执行的命令
 			local command = string.format(
-				'!echo \'{"cells":[],"metadata":{"kernelspec":{"display_name":"Python 3 (ipykernel)","language":"python","name":"python3"},"language_info":{"codemirror_mode":{"name":"ipython","version":3},"file_extension":".py","mimetype":"text/x-python","name":"python","nbconvert_exporter":"python","pygments_lexer":"ipython3"}},"nbformat":4,"nbformat_minor":5}\' | jupyter nbconvert --to notebook --execute --stdin --output-dir=%s --output=%s',
+				'!echo \'{"cells":[],"metadata":{"kernelspec":{"display_name":"Python 3 (ipykernel)","language":"python","name":"python3"}},"nbformat":4,"nbformat_minor":5}\' | jupyter nbconvert --to notebook --execute --stdin --output-dir=%s --output=%s',
 				dir_path,
 				file_name
 			)
