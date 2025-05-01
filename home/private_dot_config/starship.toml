@@ -103,10 +103,10 @@ pipestatus_format = "[─](fg:current_line)[](fg:status)[](fg:primary bg:s
 disabled = false
 
 [directory]
-format = '[─](fg:current_line)[](fg:pink)[󰷏](fg:primary bg:pink)[](fg:pink bg:box)[ $read_only$truncation_symbol$path](fg:foreground bg:box)[](fg:box)'
-home_symbol = " ~/"
-truncation_symbol = ' '
-truncation_length = 2
+format = '[─](fg:current_line)[](fg:pink)[󰷏](fg:primary bg:pink)[](fg:pink bg:box)[ $path](fg:foreground bg:box)[](fg:box)([](fg:status)[$read_only](fg:primary bg:status)[](fg:status bg:box))'
+home_symbol = " ~"
+truncate_to_repo = true
+truncation_length = 3
 read_only = '󱧵 '
 read_only_style = ''
 
