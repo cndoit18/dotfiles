@@ -3,13 +3,6 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_STATE_HOME=$HOME/.local/state
 export XDG_CACHE_HOME=$HOME/.cache
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block, everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # If you come from bash you might have to change your $PATH.
 {{- $paths := list }}
 {{- $homeDir := .chezmoi.homeDir }}
@@ -95,9 +88,6 @@ alias vimdiff='nvim -d'
 export GITHUB_TOKEN={{ .githubToken }}
 [[ ! -f ~/.config/op/plugins.sh ]] || source ~/.config/op/plugins.sh
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
@@ -113,5 +103,5 @@ export DYLD_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_LIBRARY_PATH"
 eval "$(starship init zsh)"
 {{- end }}
 
-export LANG=zh_CN.utf8
-export LC_ALL=zh_CN.utf8
+export LANG=zh_CN.UTF-8
+export LC_ALL=zh_CN.UTF-8
