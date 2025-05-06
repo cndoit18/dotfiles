@@ -28,6 +28,7 @@ return {
 				"vim",
 				"yaml",
 				"rust",
+				"hurl",
 			},
 			highlight = {
 				enable = true,
