@@ -2,3 +2,17 @@
 
 # {{ now | date "2006-01" | sha256sum }}
 
+required_commands=(
+	mercurial
+	bison
+	fuse
+)
+
+if [[ -n "$(command -v apt-get)" ]]; then
+	required_commands+=(
+	)
+
+	apt-get update
+	apt-get install -y "${required_commands[@]}"
+
+fi
