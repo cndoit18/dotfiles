@@ -19,13 +19,14 @@ Darwin)
 	;;
 Linux)
 	if [ ! "$(command -v op)" ]; then
-		curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
-		echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/amd64 stable main' | sudo tee /etc/apt/sources.list.d/1password.list
-		sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/
-		curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
-		sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
-		curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
-		sudo apt update && sudo apt install -y 1password-cli
+		ARCH=$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/') &&
+			wget "https://cache.agilebits.com/dist/1P/op2/pkg/v2.30.3/op_linux_${ARCH}_v2.30.3.zip" -O op.zip &&
+			unzip -d op op.zip &&
+			sudo mv op/op /usr/local/bin/ &&
+			rm -r op.zip op &&
+			sudo groupadd -f onepassword-cli &&
+			sudo chgrp onepassword-cli /usr/local/bin/op &&
+			sudo chmod g+s /usr/local/bin/op
 	fi
 	;;
 *)
