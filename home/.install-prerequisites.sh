@@ -28,6 +28,15 @@ Linux)
 			sudo chgrp onepassword-cli /usr/local/bin/op &&
 			sudo chmod g+s /usr/local/bin/op
 	fi
+
+	if [ ! "$(command -v zsh)" ]; then
+		sudo apt-get update
+		sudo apt-get install zsh
+	fi
+
+	if [ "$(SHELL)" != "$(which zsh)" ]; then
+		sudo usermod -s "$(which zsh)" "$(whoami)"
+	fi
 	;;
 *)
 	echo "unsupported OS"
