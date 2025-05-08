@@ -16,7 +16,7 @@ export XDG_CACHE_HOME=$HOME/.cache
 {{-   $paths = mustAppend $paths "/usr/local/opt/trash/bin" }}
 {{- end }}
 {{- if $paths }}
-export PATH={{ toStrings $paths | join ":" }}:$PATH
+export PATH={{ $paths | join ":" }}:$PATH
 {{- end }}
 
 # Path to your oh-my-zsh installation.
