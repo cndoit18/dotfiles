@@ -3,7 +3,7 @@ return {
 		"iamcco/markdown-preview.nvim",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
 		ft = { "markdown" },
-		build = "cd app && yarn install",
+		build = "cd app && npx yarn install",
 	},
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
