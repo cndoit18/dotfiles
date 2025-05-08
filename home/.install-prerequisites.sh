@@ -34,7 +34,7 @@ Linux)
 		sudo apt-get install zsh
 	fi
 
-	if [ "$(SHELL)" != "$(which zsh)" ]; then
+	if [ "${SHELL}" != "$(which zsh)" ]; then
 		sudo usermod -s "$(which zsh)" "$(whoami)"
 	fi
 	;;
