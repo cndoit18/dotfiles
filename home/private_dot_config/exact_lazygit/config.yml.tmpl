@@ -4,13 +4,13 @@ customCommands:
     description: "commit with commitizen"
     context: "files"
     loadingText: "opening commitizen commit tool"
-    subprocess: true
+    output: terminal
   - key: "G"
     command: "git cz ai"
     description: "generate commit message"
     context: "files"
     loadingText: "opening commitizen commit tool"
-    subprocess: true
+    output: terminal
 {{- if lookPath "delta" }}
 git:
   paging:
