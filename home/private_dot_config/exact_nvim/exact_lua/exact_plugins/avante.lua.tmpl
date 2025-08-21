@@ -20,9 +20,13 @@ return {
 				extra_request_body = {
 					temperature = 0.75,
 				},
+				extra_headers = {
+				-- {{ range $key, $value := .ai.header }}
+					["{{ $key }}"] = "{{ $value }}",
+				-- {{ end }}
+				},
 			},
 		},
-		mappings = {},
 	},
 	dependencies = {
 		"nvim-lua/plenary.nvim",
