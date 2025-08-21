@@ -14,12 +14,11 @@ return {
 		provider = "openai",
 		providers = {
 			openai = {
-				endpoint = "{{ .ai.endpoint | trimSuffix " / " }}",
+				endpoint = "{{ .ai.endpoint | trimSuffix " / " }}/v1",
 				model = "{{ .ai.model }}",
 				timeout = 30000, -- Timeout in milliseconds
 				extra_request_body = {
 					temperature = 0.75,
-					max_tokens = 20480,
 				},
 			},
 		},
