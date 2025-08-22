@@ -4,3 +4,4 @@ OCO_API_URL={{ .ai.endpoint | trimSuffix " / " }}/v1
 OCO_MODEL={{ .ai.model }}
 OCO_GITPUSH=false
 OCO_API_CUSTOM_HEADERS='{{ toJson .ai.header }}'
+OCO_PROMPT_MODULE=conventional-commit
