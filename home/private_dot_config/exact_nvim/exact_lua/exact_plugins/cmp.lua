@@ -26,14 +26,15 @@ return {
 		},
 	},
 	init = function()
-		local lspconfig = require("lspconfig")
 		local capabilities = require("cmp_nvim_lsp").default_capabilities()
 		capabilities.textDocument.foldingRange = {
 			dynamicRegistration = false,
 			lineFoldingOnly = true,
 		}
 		for _, lsp in ipairs(require("mason-lspconfig").get_installed_servers()) do
-			lspconfig[lsp].capabilities = capabilities
+			vim.lsp.config(lsp, {
+				capabilities = capabilities,
+			})
 		end
 	end,
 	config = function()

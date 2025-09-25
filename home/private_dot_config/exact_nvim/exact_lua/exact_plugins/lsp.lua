@@ -40,7 +40,6 @@ return {
 		})
 	end,
 	config = function()
-		local lspconfig = require("lspconfig")
 		local util = require("lspconfig/util")
 
 		local path = util.path
@@ -87,7 +86,7 @@ return {
 				}
 			end
 
-			lspconfig[lsp].setup(config)
+			vim.lsp.config(lsp, config)
 		end
 	end,
 }
