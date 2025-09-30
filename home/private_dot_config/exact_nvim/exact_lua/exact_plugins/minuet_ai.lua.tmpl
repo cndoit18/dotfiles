@@ -1,0 +1,28 @@
+return {
+	"milanglacier/minuet-ai.nvim",
+	dependencies = { "nvim-lua/plenary.nvim", "hrsh7th/nvim-cmp" },
+	config = function()
+		table.insert(require("cmp").get_config().sources, {
+			name = "minuet",
+			group_index = 1,
+		})
+		require("minuet").setup({
+			lsp = {
+				enabled_auto_trigger_ft = { "*" },
+			},
+			provider = "openai_compatible",
+			provider_options = {
+				openai_compatible = {
+					end_point = "{{ .ai.endpoint | trimSuffix " / " }}/v1/chat/completions",
+					api_key = "OPENAI_API_KEY",
+					name = "openai",
+					model = "{{ .ai.nothink_model }}",
+					optional = {
+						max_tokens = 256,
+						top_p = 0.9,
+					},
+				},
+			},
+		})
+	end,
+}

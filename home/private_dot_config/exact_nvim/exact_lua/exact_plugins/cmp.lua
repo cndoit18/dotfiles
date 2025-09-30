@@ -58,13 +58,16 @@ return {
 						fallback()
 					end
 				end, { "i", "s" }),
-
 				["<C-p>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_prev_item()
 					else
 						fallback()
 					end
+				end, { "i", "s" }),
+				["<C-f>"] = cmp.mapping.complete(),
+				["<C-e>"] = cmp.mapping(function(fallback)
+					cmp.abort()
 				end, { "i", "s" }),
 			},
 
@@ -75,6 +78,14 @@ return {
 					name = "lazydev",
 					group_index = 0, -- set group index to 0 to skip loading LuaLS completions
 				},
+			},
+			---@diagnostic disable-next-line: missing-fields
+			performance = {
+				-- It is recommended to increase the timeout duration due to
+				-- the typically slower response speed of LLMs compared to
+				-- other completion sources. This is not needed when you only
+				-- need manual completion.
+				fetching_timeout = 2000,
 			},
 		})
 		-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).

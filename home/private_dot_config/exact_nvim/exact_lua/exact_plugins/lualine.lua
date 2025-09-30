@@ -14,6 +14,7 @@ return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
+		"milanglacier/minuet-ai.nvim",
 	},
 	opts = {
 		extensions = {
@@ -55,6 +56,9 @@ return {
 		inactive_winbar = {},
 	},
 	config = function(_, opts)
+		if package.loaded["minuet"] then
+			table.insert(opts.sections.lualine_x, require("minuet.lualine"))
+		end
 		require("lualine").setup(opts)
 	end,
 }

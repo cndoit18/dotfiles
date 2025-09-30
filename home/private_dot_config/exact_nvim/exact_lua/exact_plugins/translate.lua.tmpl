@@ -10,7 +10,7 @@ local function translate()
 				-- {{ end }}
 				"--data",
 				vim.json.encode({
-					["model"] = "{{ .ai.model }}",
+					["model"] = "{{ .ai.nothink_model }}",
 					["messages"] = {
 						{
 							["role"] = "system",
