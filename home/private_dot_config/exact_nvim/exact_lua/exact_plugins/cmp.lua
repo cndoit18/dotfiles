@@ -39,7 +39,28 @@ return {
 	end,
 	config = function()
 		local cmp = require("cmp")
+		local source_icons = {
+			minuet = "󱗻",
+			nvim_lsp = "",
+			lsp = "",
+			buffer = "",
+			luasnip = "",
+			snippets = "",
+			path = "",
+			git = "",
+			tags = "",
+			-- FALLBACK
+			fallback = "󰜚",
+		}
 		cmp.setup({
+			formatting = {
+				format = function(entry, vim_item)
+					-- Kind icons
+					-- This concatenates the icons with the name of the item kind
+					vim_item.menu = source_icons[entry.source.name] or source_icons.fallback
+					return vim_item
+				end,
+			},
 			mapping = {
 				["<C-y>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
@@ -79,13 +100,18 @@ return {
 					group_index = 0, -- set group index to 0 to skip loading LuaLS completions
 				},
 			},
-			---@diagnostic disable-next-line: missing-fields
 			performance = {
+				debounce = 60,
+				throttle = 30,
 				-- It is recommended to increase the timeout duration due to
 				-- the typically slower response speed of LLMs compared to
 				-- other completion sources. This is not needed when you only
 				-- need manual completion.
 				fetching_timeout = 2000,
+				filtering_context_budget = 3,
+				confirm_resolve_timeout = 80,
+				async_budget = 1,
+				max_view_entries = 200,
 			},
 		})
 		-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
