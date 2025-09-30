@@ -15,7 +15,7 @@ return {
 		providers = {
 			openai = {
 				endpoint = "{{ .ai.endpoint | trimSuffix " / " }}/v1",
-				model = "{{ .ai.model }}",
+				model = "{{ .ai.nothink_model }}",
 				timeout = 30000, -- Timeout in milliseconds
 				extra_request_body = {
 					temperature = 0.75,
