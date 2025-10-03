@@ -64,8 +64,8 @@ module.exports = {
   useAI: false,
   openAIToken: "{{ .ai.token }}",
   apiEndpoint: "{{ .ai.endpoint | trimSuffix "/" }}/v1",
-  apiModel: "{{ .ai.model }}",
-  aiNumber: {{ .ai.number }},
+  apiModel: "{{ .ai.nothink_model }}",
+  aiNumber: 1,
   aiQuestionCB: ({
     maxSubjectLength,
     upperCaseSubject,
