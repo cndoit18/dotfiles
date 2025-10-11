@@ -19,8 +19,8 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		{ "j-hui/fidget.nvim", opts = {} },
-		{ "williamboman/mason.nvim" },
-		{ "williamboman/mason-lspconfig.nvim", opts = { ensure_installed = lsp_servers } },
+		{ "mason-org/mason.nvim" },
+		{ "mason-org/mason-lspconfig.nvim", opts = { ensure_installed = lsp_servers } },
 	},
 	init = function()
 		vim.api.nvim_create_autocmd("LspAttach", {

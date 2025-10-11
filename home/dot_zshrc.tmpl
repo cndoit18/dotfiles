@@ -107,3 +107,13 @@ export LANG=zh_CN.UTF-8
 export LC_ALL=zh_CN.UTF-8
 
 export OPENAI_API_KEY="{{ .ai.token }}"
+
+uv python list --managed-python --only-installed --color=never \
+  | awk '{print $2}' \
+  | while read python_executable; do
+    python_bin_dir="$(dirname "$python_executable")"
+    case ":$PATH:" in
+      *":$python_bin_dir:"*) :;; # Already in PATH
+      *) PATH="$python_bin_dir:$PATH";; # Not yet in PATH
+    esac
+  done
