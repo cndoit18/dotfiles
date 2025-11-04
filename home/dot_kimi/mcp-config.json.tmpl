@@ -7,8 +7,10 @@
     },
     "tavily-remote-mcp": {
       "command": "npx",
-      "args": ["-y", "mcp-remote", "https://mcp.tavily.com/mcp/?tavilyApiKey={{ onepasswordRead "op://Personal/Tavily/credential" }}"],
-      "env": {}
+      "args": ["-y", "tavily-mcp"],
+      "env": {
+        "TAVILY_API_KEY": "{{ onepasswordRead "op://Personal/Tavily/credential" }}"
+      }
     }
   }
 }
