@@ -1,10 +1,9 @@
 {
   "mcpServers": {
     "context7": {
-      "headers": {
-        "CONTEXT7_API_KEY": "{{ onepasswordRead "op://Personal/Context7/credential" | trim }}"
-      },
-      "url": "https://mcp.context7.com/mcp"
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp", "--api-key", "{{ onepasswordRead "op://Personal/Context7/credential" | trim }}"],
+      "env": {}
     },
     "tavily-remote-mcp": {
       "command": "npx",
