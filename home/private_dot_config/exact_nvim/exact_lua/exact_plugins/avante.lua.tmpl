@@ -8,11 +8,12 @@ return {
 	version = false, -- 永远不要将此值设置为 "*"！永远不要！
 	config = function()
 		require("avante").setup({
-			-- 在此处添加任何选项
-			-- 例如
-			provider = "kimi-cli",
+			provider = "codex",
 			acp_providers = {
-				["kimi-cli"] = {
+				["codex"] = {
+					command = "codex-acp",
+				},
+				["kimi"] = {
 					command = "kimi",
 					args = { "--acp" },
 				},
