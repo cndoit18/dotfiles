@@ -1,0 +1,22 @@
+{
+  "default_model": "deepseek",
+  "models": {
+    "deepseek": {
+      "provider": "openai",
+      "model": "DeepSeek-V3.2-Exp",
+      "max_context_size": 160000
+    }
+  },
+  "providers": {
+    "openai": {
+      "type": "openai_legacy",
+      "base_url": "{{ .ai.endpoint | trimSuffix "/" }}/v1",
+      "api_key": "{{ .ai.token }}"
+    }
+  },
+  "loop_control": {
+    "max_steps_per_run": 100,
+    "max_retries_per_step": 5
+  },
+  "services": {}
+}

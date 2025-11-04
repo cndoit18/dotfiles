@@ -6,28 +6,22 @@ return {
 		or "make BUILD_FROM_SOURCE=true",
 	event = "VeryLazy",
 	version = false, -- 永远不要将此值设置为 "*"！永远不要！
-	---@module 'avante'
-	---@type avante.Config
-	opts = {
-		-- 在此处添加任何选项
-		-- 例如
-		provider = "openai",
-		providers = {
-			openai = {
-				endpoint = "{{ .ai.endpoint | trimSuffix " / " }}/v1",
-				model = "{{ .ai.nothink_model }}",
-				timeout = 30000, -- Timeout in milliseconds
-				extra_request_body = {
-					temperature = 0.75,
-				},
-				extra_headers = {
-				-- {{ range $key, $value := .ai.header }}
-					["{{ $key }}"] = "{{ $value }}",
-				-- {{ end }}
+	config = function()
+		require("avante").setup({
+			-- 在此处添加任何选项
+			-- 例如
+			provider = "kimi-cli",
+			acp_providers = {
+				["kimi-cli"] = {
+					command = "kimi",
+					args = { "--acp", "--mcp-config", '{"mcpServers":{"context7":{"headers":{"CONTEXT7_API_KEY":"{{ onepasswordRead "op://Personal/Context7/credential" | trim }}"},"url":"https://mcp.context7.com/mcp"}}}' },
 				},
 			},
-		},
-	},
+			behaviour = {
+				auto_approve_tool_permissions = false,
+			},
+		})
+	end,
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
