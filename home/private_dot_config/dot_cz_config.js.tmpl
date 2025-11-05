@@ -63,7 +63,7 @@ module.exports = {
   emojiAlign: "center",
   useAI: false,
   openAIToken: "{{ .ai.token }}",
-  apiEndpoint: "{{ .ai.endpoint | trimSuffix "/" }}/v1",
+  apiEndpoint: "{{ .ai.endpoint | trimSuffix "/" }}",
   apiModel: "{{ .ai.nothink_model }}",
   aiNumber: 1,
   aiQuestionCB: ({

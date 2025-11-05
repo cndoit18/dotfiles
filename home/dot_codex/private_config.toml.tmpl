@@ -1,5 +1,5 @@
 # Recall that in TOML, root keys must be listed before tables.
-model = "DeepSeek-V3.2-Exp"
+model = "{{ .ai.model | trim }}"
 model_provider = "openai-chat-completions"
 
 [model_providers.openai-chat-completions]
@@ -7,7 +7,7 @@ model_provider = "openai-chat-completions"
 name = "OpenAI using Chat Completions"
 # The path `/chat/completions` will be amended to this URL to make the POST
 # request for the chat completions.
-base_url = "{{ .ai.endpoint | trimSuffix "/" }}/v1"
+base_url = "{{ .ai.endpoint | trimSuffix "/" }}"
 # If `env_key` is set, identifies an environment variable that must be set when
 # using Codex with this provider. The value of the environment variable must be
 # non-empty and will be used in the `Bearer TOKEN` HTTP header for the POST request.

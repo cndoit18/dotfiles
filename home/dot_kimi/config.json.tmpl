@@ -3,14 +3,14 @@
   "models": {
     "aihubmix": {
       "provider": "openai",
-      "model": "DeepSeek-V3.2-Exp",
+      "model": "{{ .ai.model | trim }}",
       "max_context_size": 128000
     }
   },
   "providers": {
     "openai": {
       "type": "openai_legacy",
-      "base_url": "{{ .ai.endpoint | trimSuffix "/" }}/v1",
+      "base_url": "{{ .ai.endpoint | trimSuffix "/" }}",
       "api_key": "{{ .ai.token }}"
     }
   },

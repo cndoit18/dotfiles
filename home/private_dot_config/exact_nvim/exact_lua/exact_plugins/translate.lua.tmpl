@@ -2,7 +2,7 @@ local function translate()
 	require("translate").translate({
 		get_command = function(input)
 			return {
-				"curl", "{{ .ai.endpoint | trimSuffix "/" }}/v1/chat/completions",
+				"curl", "{{ .ai.endpoint | trimSuffix "/" }}/chat/completions",
 				"-H", "Content-Type: application/json",
 				"-H", "Authorization: Bearer {{ .ai.token }}",
 				-- {{ range $key, $value := .ai.header }}

@@ -1,6 +1,6 @@
 OCO_AI_PROVIDER=openai
 OCO_API_KEY={{ .ai.token }}
-OCO_API_URL={{ .ai.endpoint | trimSuffix " / " }}/v1
+OCO_API_URL={{ .ai.endpoint | trimSuffix " / " }}
 OCO_MODEL={{ .ai.nothink_model }}
 OCO_GITPUSH=false
 OCO_API_CUSTOM_HEADERS='{{ toJson .ai.header }}'
