@@ -1,21 +1,16 @@
-# Recall that in TOML, root keys must be listed before tables.
 model = "{{ .ai.model | trim }}"
 model_provider = "openai-chat-completions"
+approval_policy = "never"
+disable_response_storage = false
+hide_agent_reasoning = false
+model_supports_reasoning_summaries = true
+sandbox_mode = "danger-full-access"
 
 [model_providers.openai-chat-completions]
-# Name of the provider that will be displayed in the Codex UI.
 name = "OpenAI using Chat Completions"
-# The path `/chat/completions` will be amended to this URL to make the POST
-# request for the chat completions.
 base_url = "{{ .ai.endpoint | trimSuffix "/" }}"
-# If `env_key` is set, identifies an environment variable that must be set when
-# using Codex with this provider. The value of the environment variable must be
-# non-empty and will be used in the `Bearer TOKEN` HTTP header for the POST request.
 env_key = "OPENAI_API_KEY"
-# Valid values for wire_api are "chat" and "responses". Defaults to "chat" if omitted.
 wire_api = "chat"
-# If necessary, extra query params that need to be added to the URL.
-# See the Azure example below.
 query_params = {}
 
 [mcp_servers.context7]
