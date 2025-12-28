@@ -6,7 +6,6 @@ return {
 	opts = {
 		scroll = {},
 		lazygit = {},
-		terminal = {},
 		gitbrowse = {
 			url_patterns = {
 				[".*"] = {
@@ -33,13 +32,6 @@ return {
 				require("snacks").lazygit()
 			end,
 			desc = "LazyGit",
-		},
-		{
-			"<leader><C-t>",
-			function()
-				require("snacks").terminal.toggle()
-			end,
-			desc = "Toggle terminal",
 		},
 	},
 }
