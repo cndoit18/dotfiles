@@ -26,6 +26,7 @@ $character\
 
 palette = 'tokyo_night'
 add_newline = true
+command_timeout = 5000
 
 [palettes.tokyo_night]
 foreground = '#D8D8D8'
