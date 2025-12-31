@@ -8,6 +8,12 @@ return {
 	version = false, -- 永远不要将此值设置为 "*"！永远不要！
 	config = function()
 		require("avante").setup({
+			behaviour = {
+				enable_fastapply = false,
+				enable_cursor_planning_mode = true,
+				auto_suggestions = false,
+				auto_approve_tool_permissions = false,
+			},
 			provider = "claude-code",
 			acp_providers = {
 				["claude-code"] = {
