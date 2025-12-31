@@ -103,6 +103,10 @@ export DYLD_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_LIBRARY_PATH"
 eval "$(starship init zsh)"
 {{- end }}
 
+{{- if lookPath "ccr" }}
+eval "$(ccr activate)"
+{{- end }}
+
 export LANG=zh_CN.UTF-8
 export LC_ALL=zh_CN.UTF-8
 

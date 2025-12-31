@@ -8,15 +8,24 @@ return {
 	version = false, -- 永远不要将此值设置为 "*"！永远不要！
 	config = function()
 		require("avante").setup({
-			provider = "codex",
+			provider = "claude-code",
 			acp_providers = {
+				["claude-code"] = {
+					command = "claude-acp",
+					env = {
+						NODE_NO_WARNINGS = "1",
+						ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY"),
+						ANTHROPIC_AUTH_TOKEN = os.getenv("ANTHROPIC_AUTH_TOKEN"),
+						ANTHROPIC_BASE_URL = os.getenv("ANTHROPIC_BASE_URL"),
+						ACP_PATH_TO_CLAUDE_CODE_EXECUTABLE = vim.fn.exepath("claude"),
+						ACP_PERMISSION_MODE = "bypassPermissions",
+						DISABLE_TELEMETRY = "true",
+						DISABLE_COST_WARNINGS = "true",
+				      },
+				},
 				["codex"] = {
 					command = "codex-acp",
 					auth_method = "openai-api-key",
-				},
-				["kimi"] = {
-					command = "kimi",
-					args = { "--acp" },
 				},
 			},
 		})

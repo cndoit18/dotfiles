@@ -1,3 +1,0 @@
-#!/bin/sh
-{{ $config := joinPath .chezmoi.homeDir ".kimi" "mcp-config.json" -}}
-uvx --from kimi-cli --python 3.13 kimi --mcp-config-file {{ toString $config }} "$@"
