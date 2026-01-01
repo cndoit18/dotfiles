@@ -1,5 +1,5 @@
 ---
-allowed-tools: Agent, Bash, Grep, Read
+allowed-tools: Task, Bash, Grep, Read
 description: Analyze uncommitted changes and create logical commits with Conventional Commits format
 ---
 
@@ -37,10 +37,20 @@ Analyze uncommitted files, group them into cohesive commits, and create commits 
    - Style/formatting last
 
 5. **Create commits**:
+
    - Stage files for each logical group
    - Generate commit message with type, scope, and description
    - Include detailed body when needed
    - Add breaking change footer if applicable
+
+6. **Human confirmation workflow**:
+   - Present all planned commits with their messages
+   - **Use AskUserQuestion tool to get user approval**
+   - Options to present:
+     - "Approve all" → proceed with creating all commits
+     - "Modify" → user will provide corrections
+     - "Cancel" → abort without committing
+   - Only execute git commit after receiving approval
 
 ## Conventional Commit Types
 
@@ -128,6 +138,22 @@ Commit 5/5:
 Staging: README.md, docs/authentication.md
 Message: docs(auth): add authentication documentation
 
+[AskUserQuestion]
+Question: "Do you want to proceed with creating these commits?"
+Options:
+- "Approve all": Create all commits as shown above
+- "Modify": I'll provide corrections to the messages
+- "Cancel": Abort and start over
+
+[User selects "Approve all"]
+
+✅ Creating commits...
+Commit 1/5 created: chore(config): update TypeScript config and dependencies
+Commit 2/5 created: fix(users): resolve null pointer in user lookup
+Commit 3/5 created: feat(auth): implement JWT authentication system
+Commit 4/5 created: test(auth): add comprehensive auth tests
+Commit 5/5 created: docs(auth): add authentication documentation
+
 ✅ Created 5 logical commits from 12 files!
 Ready to push when you're ready.
 ```
@@ -155,6 +181,12 @@ fix(api,db): resolve data consistency issue
 
 ## Notes
 
+- **ALWAYS use AskUserQuestion tool to get user approval before executing git commit**
+- Present all planned commit messages, then ask user to:
+  - "Approve all" - create all commits as shown
+  - "Modify" - user provides corrections, then re-present for approval
+  - "Cancel" - abort without committing
+- Only proceed with git commit commands after receiving explicit approval
 - Analyzes file relationships to create logical groups
 - Maintains clean commit history
 - Follows Conventional Commits strictly
