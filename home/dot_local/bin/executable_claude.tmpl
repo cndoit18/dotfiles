@@ -1,2 +1,3 @@
 #!/bin/sh
-npx @anthropic-ai/claude-code "$@"
+{{ $config := joinPath .chezmoi.homeDir ".claude" ".mcp.json" -}}
+npx @anthropic-ai/claude-code --mcp-config={{ toString $config }} "$@"
