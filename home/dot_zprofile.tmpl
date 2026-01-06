@@ -9,3 +9,12 @@ fpath+=("$(/usr/local/bin/brew --prefix)/share/zsh/site-functions")
 eval "$(/usr/local/bin/brew shellenv)"
 
 {{ end -}}
+
+# nvm - Node Version Manager
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# gvm - Go Version Manager
+[ -f ~/.gvm/scripts/gvm ] && source ~/.gvm/scripts/gvm
+
+# Rust cargo environment
+source "$HOME/.cargo/env"

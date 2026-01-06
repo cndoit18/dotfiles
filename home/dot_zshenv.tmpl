@@ -1,0 +1,65 @@
+# XDG Base Directory Specification
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_STATE_HOME=$HOME/.local/state
+export XDG_CACHE_HOME=$HOME/.cache
+
+# PATH configuration
+{{- $paths := list }}
+{{- $homeDir := .chezmoi.homeDir }}
+{{- range $_, $relPath := list "bin" "go/bin" ".cargo/bin" ".local/bin" }}
+{{-   $path := joinPath $homeDir $relPath }}
+{{-   if stat $path }}
+{{-     $paths = mustAppend $paths $path }}
+{{-   end }}
+{{- end }}
+{{- if isExecutable "/usr/local/opt/trash/bin/trash" }}
+{{-   $paths = mustAppend $paths "/usr/local/opt/trash/bin" }}
+{{- end }}
+{{- if $paths }}
+export PATH={{ $paths | join ":" }}:$PATH
+{{- end }}
+
+# Oh My Zsh installation path
+export ZSH=$HOME/.oh-my-zsh
+
+# Oh My Zsh configuration
+ZSH_THEME=""
+CASE_SENSITIVE="true"
+DISABLE_AUTO_UPDATE="true"
+HIST_STAMPS="yyyy-mm-dd"
+ZSH_DISABLE_COMPFIX=true
+
+# Application tokens and keys
+export GITHUB_TOKEN={{ .githubToken }}
+export OPENAI_API_KEY="{{ .ai.token }}"
+
+# NVM directory
+export NVM_DIR="$HOME/.config/nvm"
+
+# Editor configuration
+{{- if lookPath "nvim" }}
+export EDITOR=nvim
+{{- end }}
+
+# Locale settings
+export LANG=zh_CN.UTF-8
+export LC_ALL=zh_CN.UTF-8
+
+# macOS specific library path
+{{- if eq .chezmoi.os "darwin" }}
+{{- if lookPath "brew" }}
+export DYLD_LIBRARY_PATH="$({{ lookPath "brew"}} --prefix)/lib:$DYLD_LIBRARY_PATH"
+{{- end }}
+{{- end }}
+
+# uv managed Python executables PATH configuration
+uv python list --managed-python --only-installed --color=never \
+  | awk '{print $2}' \
+  | while read python_executable; do
+    python_bin_dir="$(dirname "$python_executable")"
+    case ":$PATH:" in
+      *":$python_bin_dir:"*) :;; # Already in PATH
+      *) PATH="$python_bin_dir:$PATH";; # Not yet in PATH
+    esac
+  done
