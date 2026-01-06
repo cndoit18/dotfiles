@@ -1,4 +1,5 @@
 {
+  "outputStyle": "Torvalds",
   "permissions": {
     "allow": [
       "mcp__context7__resolve-library-id",
