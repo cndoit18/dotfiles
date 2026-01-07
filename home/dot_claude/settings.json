@@ -8,6 +8,7 @@
       "Skill(excalidraw)"
     ]
   },
+  "includeCoAuthoredBy": false,
   "hooks": {
     "PostToolUse": [
       {
