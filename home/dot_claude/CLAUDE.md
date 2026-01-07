@@ -8,3 +8,10 @@ This document contains critical information about working with this codebase. Fo
 - Always load skill `go-uber-style` when working with `.go` files.
 - Always load skill `excalidraw` when the user requests architecture diagrams, system diagrams, codebase visualization, or Excalidraw file generation.
 - When working with Python projects, always check for a virtual environment (venv) and activate it if present. Prefer using `uv run` instead of `python` when available.
+
+## Comments & Communication
+
+- Write comments explaining "why" not "what"
+- Document non-obvious behavior and edge cases
+- Include relevant links to documentation or issues
+- Keep comments current with code changes
