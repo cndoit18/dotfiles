@@ -6,7 +6,8 @@
       "mcp__context7__resolve-library-id",
       "mcp__context7__query-docs",
       "Skill(go-uber-style)",
-      "Skill(excalidraw)"
+      "Skill(excalidraw)",
+      "Skill(dev-browser)"
     ]
   },
   "includeCoAuthoredBy": false,
