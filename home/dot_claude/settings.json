@@ -9,6 +9,9 @@
       "Skill(excalidraw)"
     ]
   },
+  "env": {
+    "DISABLE_AUTOUPDATER": "1"
+  },
   "includeCoAuthoredBy": false,
   "hooks": {
     "PostToolUse": [
