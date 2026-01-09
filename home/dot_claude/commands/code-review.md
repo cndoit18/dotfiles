@@ -1,5 +1,5 @@
 ---
-allowed-tools: Bash, Grep, LSP, Read, Task
+allowed-tools: AskUserQuestion, Bash(git:*), Glob, Grep, LSP, Read, Task, TodoWrite
 description: Multi-aspect code review with comprehensive analysis
 ---
 

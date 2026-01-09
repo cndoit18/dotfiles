@@ -1,5 +1,5 @@
 ---
-allowed-tools: Task, Bash, Grep, Read
+allowed-tools: AskUserQuestion, Bash(git:*), Glob, Grep, Read, TodoWrite
 description: Analyze uncommitted changes and create logical commits with Conventional Commits format
 ---
 
