@@ -1,11 +1,9 @@
 ---
 allowed-tools: Bash, Grep, LSP, Read, Task
-description: Multi-aspect code review with comprehensive analysis (outputs Chinese report)
+description: Multi-aspect code review with comprehensive analysis
 ---
 
 # Code Review
-
-**IMPORTANT**: This command generates code review reports in Chinese.
 
 ## Current Repository State
 
@@ -224,6 +222,5 @@ When this command is invoked:
    - Use LSP tool for code intelligence (if available)
    - Apply deep thinking for complex analysis
 4. **Generate Report**: Consolidate findings using the template above
-5. **Output in Chinese**: Present findings in Chinese as specified
 
 DO NOT mention this internal process to the user. Simply perform the review and present the final report.
