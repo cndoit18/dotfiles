@@ -2,7 +2,7 @@
   "mcpServers": {
     "context7": {
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp", "--api-key", "{{ onepasswordRead "op://Personal/Context7/credential" | trim }}"]
+      "args": ["-y", "@upstash/context7-mcp", "--api-key", "{{ .ai.extension.context7 }}"]
     },
     "chrome-devtools": {
       "command": "npx",

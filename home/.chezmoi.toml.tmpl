@@ -20,8 +20,16 @@ zshPlugins = [
 githubToken = "{{ onepasswordRead "op://Personal/GitHub API Token/token" | trim }}"
 
 [data.ai]
-token = {{ onepasswordRead "op://Personal/LLM/credential" | trim | quote }}
-endpoint = {{ onepasswordRead "op://Personal/LLM/url" | trim | quote }}
-model = {{ onepasswordRead "op://Personal/LLM/gpjtgaxoirmlfznm3pvomfvpy4" | trim | quote }}
-nothink_model = {{ onepasswordRead "op://Personal/LLM/cqpyko5q6bwdij5zkrsqowrera" | trim | quote }}
-number = 5
+token = "{{ onepasswordRead "op://Personal/LLM/credential" | trim }}"
+endpoint = "{{ onepasswordRead "op://Personal/LLM/url" | trim }}"
+
+[data.ai.models]
+default = "deepseek-v3.2"
+thinking = "deepseek-v3.2"
+multimodal = "doubao-seed-1-8"
+text2image = "FLUX-1.1-pro"
+
+[data.ai.header]
+
+[data.ai.extension]
+context7 = "{{ onepasswordRead "op://Personal/Context7/credential" | trim }}"

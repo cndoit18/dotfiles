@@ -308,22 +308,29 @@ LAYOUT:
         base64_data = base64.b64encode(image_data).decode("utf-8")
         return f"data:{mime_type};base64,{base64_data}"
 
-    def generate_image(self, prompt: str) -> Optional[bytes]:
+    def generate_image(self, prompt: str, size: str = "1024x1024") -> Optional[bytes]:
         """Generate an image using image generation API.
 
         Args:
             prompt: Description of diagram to generate
+            size: Image size (default: "1024x1024", max: "1440x1440")
 
         Returns:
             Image bytes or None if generation failed
         """
         self._last_error = None
 
+        # Validate size parameter to avoid API errors
+        valid_sizes = ["256x256", "512x512", "1024x1024", "1360x1360", "1440x1440"]
+        if size not in valid_sizes:
+            self._log(f"Invalid size '{size}', defaulting to '1024x1024'")
+            size = "1024x1024"
+
         try:
             response = self._make_image_request(
                 model=self.image_model,
                 prompt=prompt,
-                size="2048x2048",
+                size=size,
                 quality="standard",
                 response_format="b64_json",
             )
@@ -585,7 +592,7 @@ USER REQUEST: {user_prompt}
 Generate a publication-quality scientific diagram that meets all the guidelines above."""
 
         print(f"\n{'=' * 60}")
-        print(f"Generating Scientific Schematic")
+        print("Generating Scientific Schematic")
         print(f"{'=' * 60}")
         print(f"Description: {user_prompt}")
         print(f"Document Type: {doc_type}")
@@ -598,8 +605,8 @@ Generate a publication-quality scientific diagram that meets all the guidelines 
             print(f"\n[Iteration {i}/{iterations}]")
             print("-" * 40)
 
-            print(f"Generating image...")
-            image_data = self.generate_image(current_prompt)
+            print("Generating image...")
+            image_data = self.generate_image(current_prompt, size="1440x1440")
 
             if not image_data:
                 error_msg = getattr(
@@ -618,7 +625,7 @@ Generate a publication-quality scientific diagram that meets all the guidelines 
                 f.write(image_data)
             print(f"✓ Saved: {iter_path}")
 
-            print(f"Reviewing image...")
+            print("Reviewing image...")
             critique, score, needs_improvement = self.review_image(
                 str(iter_path), user_prompt, i, doc_type, iterations
             )
@@ -639,7 +646,7 @@ Generate a publication-quality scientific diagram that meets all the guidelines 
                 print(
                     f"\n✓ Quality meets {doc_type} threshold ({score} >= {threshold})"
                 )
-                print(f"  No further iterations needed!")
+                print("  No further iterations needed!")
                 results["final_image"] = str(iter_path)
                 results["final_score"] = score
                 results["success"] = True
@@ -650,14 +657,14 @@ Generate a publication-quality scientific diagram that meets all the guidelines 
                 break
 
             if i == iterations:
-                print(f"\n⚠ Maximum iterations reached")
+                print("\n⚠ Maximum iterations reached")
                 results["final_image"] = str(iter_path)
                 results["final_score"] = score
                 results["success"] = True
                 break
 
             print(f"\n⚠ Quality below threshold ({score} < {threshold})")
-            print(f"Improving prompt based on feedback...")
+            print("Improving prompt based on feedback...")
             current_prompt = self.improve_prompt(user_prompt, critique, i + 1)
 
         if results["success"] and results["final_image"]:
@@ -674,7 +681,7 @@ Generate a publication-quality scientific diagram that meets all the guidelines 
         print(f"✓ Review log: {log_path}")
 
         print(f"\n{'=' * 60}")
-        print(f"Generation Complete!")
+        print("Generation Complete!")
         print(f"Final Score: {results['final_score']}/10")
         if results["early_stop"]:
             print(
@@ -784,7 +791,7 @@ Environment:
                 )
             sys.exit(0)
         else:
-            print(f"\n✗ Generation failed. Check review log for details.")
+            print("✗ Generation failed. Check review log for details.")
             sys.exit(1)
     except Exception as e:
         print(f"\n✗ Error: {str(e)}")
