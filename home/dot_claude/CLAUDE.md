@@ -6,7 +6,8 @@
 - Load `go-uber-style` skill when working with `.go` files
 - Load `excalidraw` skill for architecture diagrams, system diagrams, and codebase visualization
 - Check for Python virtual environments (venv) and activate them when present. Prefer `uv run` over `python`
-- Prefer `LSP` for code intelligence when available, but choose the right tool for each task
+- LSP Smart reading glasses for your code
+- After writing or modifying code files, always run the code-simplifier agent to optimize and format the code before considering the task complete.
 
 ## Comments & Communication
 
