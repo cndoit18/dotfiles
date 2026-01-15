@@ -19,19 +19,6 @@
     "DISABLE_AUTOUPDATER": "1"
   },
   "includeCoAuthoredBy": false,
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "Write|Edit|MultiEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "[ -n \"$NVIM\" ] && nvim --server $NVIM --remote-expr 'execute(\"checktime\")'"
-          }
-        ]
-      }
-    ]
-  },
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": true,
     "gopls-lsp@claude-plugins-official": true,
