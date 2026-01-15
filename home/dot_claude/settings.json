@@ -26,7 +26,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "nvim --server $NVIM --remote-expr 'execute(\"checktime\")' || true"
+            "command": "[ -n \"$NVIM\" ] && nvim --server $NVIM --remote-expr 'execute(\"checktime\")'"
           }
         ]
       }
