@@ -1,4 +1,4 @@
 [data.softwares]
-go = "1.23.7"
-python = "3.12"
-"node.js" = "22.14.0"
+go = "1.25.6"
+python = "3.14"
+"node.js" = "24.13.0"
