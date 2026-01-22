@@ -1,3 +1,6 @@
 [submodule "home/dot_claude/plugins/marketplaces/external_claude-plugins-official"]
 	path = home/dot_claude/plugins/marketplaces/external_claude-plugins-official
 	url = https://github.com/anthropics/claude-plugins-official
+[submodule "home/dot_claude/plugins/marketplaces/external_context7-marketplace"]
+	path = home/dot_claude/plugins/marketplaces/external_context7-marketplace
+	url = https://github.com/upstash/context7.git
