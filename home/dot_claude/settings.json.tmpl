@@ -2,6 +2,7 @@
   "language": "chinese",
   "outputStyle": "Torvalds",
   "permissions": {
+    "defaultMode": "plan",
     "allow": [
       "mcp__plugin_context7-plugin_context7__*",
       "mcp__chrome-devtools__*",
@@ -16,6 +17,8 @@
       "Skill(documentation-lookup)"
     ]
   },
+  "plansDirectory": "./plans",
+  "alwaysThinkingEnabled": true,
   "env": {
     "DISABLE_AUTOUPDATER": "1",
     "OPENAI_API_BASE": "{{ .ai.endpoint }}",
