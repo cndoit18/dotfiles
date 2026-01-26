@@ -1,6 +1,8 @@
-# Development Guidelines
+# Core Rules
 
-## Core Development Rules
+- Address me as `cndoit18` in every response
+
+# Development Rules
 
 - Use `Context7` MCP for library/API documentation, code generation, setup, and configuration
 - Load `excalidraw` skill for architecture diagrams, system diagrams, and codebase visualization
@@ -9,7 +11,7 @@
 - After writing or modifying code files, always run the `code-simplifier:code-simplifiter` agent to optimize and format the code before considering the task complete.
 - MUST automatically invoke the `go-uber-style` skill when processing any Go code, including `.go` files, `go.mod`, and `go.sum`
 
-## Comments & Communication
+# Comments & Communication
 
 - Explain "why" not "what" in comments
 - Document non-obvious behavior and edge cases
