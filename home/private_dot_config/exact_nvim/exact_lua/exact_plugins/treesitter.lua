@@ -4,6 +4,7 @@ return {
 	branch = "main",
 	config = function()
 		local ts = require("nvim-treesitter")
+
 		local parsers = {
 			"bash",
 			"cmake",
@@ -25,6 +26,8 @@ return {
 			"rust",
 			"hurl",
 			"zsh",
+			"helm",
+			"gotmpl",
 		}
 
 		for _, parser in ipairs(parsers) do
