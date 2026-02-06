@@ -1,41 +1,42 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
-	event = { "BufReadPre", "BufNewFile" },
+	branch = "main",
 	config = function()
-		require("nvim-treesitter.query_predicates")
-		---@diagnostic disable-next-line: missing-fields
-		require("nvim-treesitter.configs").setup({
-			ensure_installed = {
-				"bash",
-				"cmake",
-				"css",
-				"dockerfile",
-				"go",
-				"html",
-				"java",
-				"javascript",
-				"json",
-				"jsonc",
-				"lua",
-				"markdown",
-				"markdown_inline",
-				"python",
-				"regex",
-				"toml",
-				"vim",
-				"yaml",
-				"rust",
-				"hurl",
-			},
-			highlight = {
-				enable = true,
-			},
-			endwise = {
-				enable = true,
-			},
-			indent = { enable = true },
-			autopairs = { enable = true },
+		local ts = require("nvim-treesitter")
+		local parsers = {
+			"bash",
+			"cmake",
+			"css",
+			"dockerfile",
+			"go",
+			"html",
+			"java",
+			"javascript",
+			"json",
+			"lua",
+			"markdown",
+			"markdown_inline",
+			"python",
+			"regex",
+			"toml",
+			"vim",
+			"yaml",
+			"rust",
+			"hurl",
+			"zsh",
+		}
+
+		for _, parser in ipairs(parsers) do
+			if not ts.get_installed(parser) then
+				pcall(ts.install, parser)
+			end
+		end
+
+		vim.api.nvim_create_autocmd("FileType", {
+			callback = function()
+				pcall(vim.treesitter.start)
+			end,
 		})
 	end,
 }
