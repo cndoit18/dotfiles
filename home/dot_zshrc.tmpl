@@ -27,13 +27,6 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-{{- if lookPath "bat" }}
-alias cat='bat -p'
-{{- end }}
-{{- if lookPath "eza" }}
-alias ls='eza --icons=auto'
-{{- end }}
-
 {{- if lookPath "nvim" }}
 alias vi=nvim
 alias vimdiff='nvim -d'

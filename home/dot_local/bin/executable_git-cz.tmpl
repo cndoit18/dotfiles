@@ -1,3 +1,3 @@
 #!/bin/sh
 {{ $config := joinPath .chezmoi.homeDir ".config" ".cz_config.js" -}}
-npx czg@v1.11.1 --config={{ toString $config }} "$@"
+npx -y czg@v1.11.1 --config={{ toString $config }} "$@"
