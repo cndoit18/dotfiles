@@ -26,6 +26,10 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+{{ $local := joinPath .chezmoi.homeDir ".zshrc.local" -}}
+{{ if stat $local -}}
+source {{ $local }}
+{{ end -}}
 
 {{- if lookPath "nvim" }}
 alias vi=nvim
