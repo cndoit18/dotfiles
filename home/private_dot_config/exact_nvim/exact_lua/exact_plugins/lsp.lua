@@ -12,6 +12,7 @@ local lsp_servers = {
 	"sqls",
 	"helm_ls",
 	"ts_ls",
+	"thriftls",
 }
 
 return {
