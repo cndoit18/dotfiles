@@ -11,7 +11,20 @@ return {
 			-- All formatter configurations are opt-in
 			filetype = {
 				lua = { require("formatter.filetypes.lua").stylua },
-				sql = { require("formatter.filetypes.sql").sqlfmt },
+				sql = {
+					{
+						exe = "sqlfluff",
+						args = {
+							"format",
+							"--disable-progress-bar",
+							"--nocolor",
+							"--dialect=postgres",
+							"-",
+						},
+						stdin = true,
+						ignore_exitcode = false,
+					},
+				},
 				sh = { require("formatter.filetypes.sh").shfmt },
 				python = { require("formatter.filetypes.python").ruff },
 				go = { require("formatter.filetypes.go").gofumpt },

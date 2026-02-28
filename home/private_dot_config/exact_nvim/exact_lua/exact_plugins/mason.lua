@@ -11,7 +11,7 @@ return {
 			-- Formatter
 			"delve",
 			"stylua",
-			"sqlfmt",
+			"sqlfluff",
 			"shfmt",
 			"gofumpt",
 			"prettier",
