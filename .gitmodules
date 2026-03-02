@@ -4,3 +4,6 @@
 [submodule "home/dot_claude/plugins/marketplaces/external_context7-marketplace"]
 	path = home/dot_claude/plugins/marketplaces/external_context7-marketplace
 	url = https://github.com/upstash/context7.git
+[submodule "home/dot_claude/plugins/marketplaces/external_agent-browser"]
+	path = home/dot_claude/plugins/marketplaces/external_agent-browser
+	url = https://github.com/vercel-labs/agent-browser.git
