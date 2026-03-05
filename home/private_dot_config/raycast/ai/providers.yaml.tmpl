@@ -1,0 +1,20 @@
+providers:
+  - id: cndoit18
+    name: cndoit18
+    base_url: "{{ .ai.endpoint }}"
+    api_keys:
+      openai: "{{ .ai.token }}"
+    models:
+      - id: "{{ .ai.models.default }}"
+        name: "default"
+        context: 200000
+        provider: openai
+        abilities:
+          temperature:
+            supported: true
+          vision:
+            supported: false
+          system_message:
+            supported: true
+          tools:
+            supported: true
