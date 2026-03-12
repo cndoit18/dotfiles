@@ -1,0 +1,21 @@
+{{- $local := joinPath .chezmoi.sourceDir "dot_claude" "plugins" "marketplaces"}}
+{{- $target := joinPath .chezmoi.homeDir ".claude" "plugins" "marketplaces"}}
+{
+{{- range $i, $path := (glob (joinPath $local "*")) }}
+{{- $url := (output "git" "-C" $path "remote"  "get-url" "origin") | trim }}
+{{- $cleanUrl := $url | replace ".git" "" }}
+{{- $parts := $cleanUrl | replace ":" "/" | splitList "/" }}
+{{- $repo := $parts | last | trim }}
+{{- $user := index $parts (sub (len $parts) 2) | trim }}
+{{- $host := index $parts (sub (len $parts) 3) | replace "git@" "" | trim }}
+{{- if $i }},{{ end }}
+  "{{ $repo }}": {
+    "source": {
+      "source": "{{ $host | splitList "." | first }}",
+      "repo": "{{ $user }}/{{ $repo }}"
+    },
+    "installLocation": "{{ joinPath $target ($path | splitList "_" | last) }}",
+    "lastUpdated": "{{ output `git` `-c` `clock.timezone=UTC` "-C" $path `log` `-1` `--date=format-local:%Y-%m-%dT%H:%M:%S.000Z` `--format=%ad` | trim }}"
+  }
+{{- end }}
+}
