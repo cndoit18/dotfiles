@@ -22,6 +22,13 @@ return {
 				end
 			end,
 		},
+		terminal = {
+			win = {
+				keys = {
+					term_normal = false,
+				},
+			},
+		},
 		scroll = {},
 		lazygit = {},
 		gitbrowse = {
