@@ -7,6 +7,3 @@
 [submodule "home/dot_claude/plugins/marketplaces/external_agent-browser"]
 	path = home/dot_claude/plugins/marketplaces/external_agent-browser
 	url = https://github.com/vercel-labs/agent-browser.git
-[submodule "home/dot_claude/plugins/marketplaces/external_claude-code-explorer-skill"]
-	path = home/dot_claude/plugins/marketplaces/external_claude-code-explorer-skill
-	url = https://github.com/cndoit18/claude-code-explorer-skill.git
