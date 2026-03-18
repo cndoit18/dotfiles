@@ -128,6 +128,8 @@ deleted = ' ✘'
 ahead = ' ⇡${count}'
 diverged = ' ⇕⇡${ahead_count}⇣${behind_count}'
 behind = ' ⇣${count}'
+ignore_submodules = true
+use_git_executable = true
 
 [nodejs]
 format = '[─](fg:current_line)[](fg:green)[$symbol](fg:primary bg:green)[](fg:green bg:box)[ $version](fg:foreground bg:box)[](fg:box)'
