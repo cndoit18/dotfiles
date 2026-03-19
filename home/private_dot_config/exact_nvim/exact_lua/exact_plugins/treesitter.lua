@@ -2,6 +2,7 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
 	branch = "main",
+	lazy = false,
 	config = function()
 		local ts = require("nvim-treesitter")
 
@@ -30,8 +31,13 @@ return {
 			"gotmpl",
 		}
 
+		local installed = {}
+		for _, v in ipairs(ts.get_installed()) do
+			installed[v] = true
+		end
+
 		for _, parser in ipairs(parsers) do
-			if not ts.get_installed(parser) then
+			if not installed[parser] then
 				pcall(ts.install, parser)
 			end
 		end
