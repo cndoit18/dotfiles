@@ -1,6 +1,9 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	build = ":TSUpdate",
+	build = function()
+		vim.cmd("!cargo install tree-sitter-cli")
+		vim.cmd(":TSUpdate")
+	end,
 	branch = "main",
 	lazy = false,
 	config = function()
