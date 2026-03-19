@@ -8,9 +8,11 @@ return {
 			notify = true,
 			size = 2 * 1024 * 1024,
 			line_length = 1500,
-			setup = function()
+			setup = function(ctx)
+				vim.schedule(function()
+					vim.bo[ctx.buf].filetype = ctx.ft
+				end)
 				vim.cmd("LspStop")
-				vim.treesitter.stop()
 				vim.opt.swapfile = false
 				vim.opt.writebackup = false
 				vim.opt.spell = false

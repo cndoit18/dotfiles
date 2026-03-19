@@ -9,6 +9,7 @@ vim.filetype.add({
 		-- ["values.*%.yaml"] = "yaml.helm-values",
 	},
 	extension = {
+		tmpl = "gotmpl",
 		gotmpl = "gotmpl",
 	},
 })

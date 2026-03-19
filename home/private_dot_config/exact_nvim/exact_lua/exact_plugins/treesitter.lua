@@ -29,22 +29,14 @@ return {
 			"zsh",
 			"helm",
 			"gotmpl",
+			"sql",
 		}
-
-		local installed = {}
-		for _, v in ipairs(ts.get_installed()) do
-			installed[v] = true
-		end
-
-		for _, parser in ipairs(parsers) do
-			if not installed[parser] then
-				pcall(ts.install, parser)
-			end
-		end
+		ts.install(parsers)
 
 		vim.api.nvim_create_autocmd("FileType", {
+			pattern = parsers,
 			callback = function()
-				pcall(vim.treesitter.start)
+				vim.treesitter.start()
 			end,
 		})
 	end,
