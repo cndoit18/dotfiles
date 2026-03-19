@@ -1,17 +1,18 @@
 return {
 	{
 		"nvim-neotest/neotest",
+		event = "LspAttach",
 		dependencies = {
 			"nvim-neotest/nvim-nio",
 			"nvim-lua/plenary.nvim",
 			"antoinemadec/FixCursorHold.nvim",
 			"nvim-treesitter/nvim-treesitter",
-			"nvim-neotest/neotest-go",
+			{ "fredrikaverpil/neotest-golang", dependencies = { "leoluz/nvim-dap-go" } },
 			{ "rouge8/neotest-rust", build = "cargo install cargo-nextest --locked" },
 		},
 		opts = {
 			adapters = {
-				["neotest-go"] = {
+				["neotest-golang"] = {
 					args = { "-coverprofile=" .. vim.fn.getcwd() .. "/coverage.out" },
 				},
 				["neotest-rust"] = {},
@@ -82,24 +83,11 @@ return {
 				type = "server",
 				port = "${port}",
 				executable = {
-					command = vim.fn.stdpath("data") .. "/mason/packages/delve/dlv",
+					command = vim.fn.stdpath("data") .. "/mason/bin/dlv",
 					args = { "dap", "-l", "127.0.0.1:${port}" },
 				},
 			}
 			dap.adapters.go = dap.adapters.delve
-			dap.configurations.go = {
-				{
-					type = "go",
-					name = "Attach",
-					request = "attach",
-				},
-				{
-					type = "go",
-					name = "Run (and debug)",
-					request = "launch",
-					program = "./${relativeFileDirname}",
-				},
-			}
 			dap.adapters.codelldb = {
 				type = "executable",
 				command = vim.fn.stdpath("data") .. "/mason/bin/codelldb",
