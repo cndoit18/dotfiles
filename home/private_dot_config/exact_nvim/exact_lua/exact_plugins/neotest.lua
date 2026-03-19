@@ -83,7 +83,7 @@ return {
 				type = "server",
 				port = "${port}",
 				executable = {
-					command = vim.fn.stdpath("data") .. "/mason/bin/dlv",
+					command = "dlv",
 					args = { "dap", "-l", "127.0.0.1:${port}" },
 				},
 			}
@@ -102,6 +102,26 @@ return {
 				dap.toggle_breakpoint()
 			end, {
 				nargs = "?",
+			})
+
+			local install_delve = function()
+				if vim.fn.executable("dlv") == 0 then
+					local go_version = vim.fn.system("go version"):match("go(%d+%.%d+)")
+					vim.fn.jobstart("go install github.com/go-delve/delve/cmd/dlv@v" .. go_version, {
+						on_exit = function(_, code)
+							if code == 0 then
+								vim.notify("Delve installed successfully!")
+							else
+								vim.notify("Installation failed! Check :messages for detailed logs.")
+							end
+						end,
+					})
+				end
+			end
+
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "go",
+				callback = install_delve,
 			})
 		end,
 		dependencies = {
