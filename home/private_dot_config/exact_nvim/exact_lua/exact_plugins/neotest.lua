@@ -13,7 +13,11 @@ return {
 		opts = {
 			adapters = {
 				["neotest-golang"] = {
-					args = { "-coverprofile=" .. vim.fn.getcwd() .. "/coverage.out" },
+					go_test_args = {
+						"-v",
+						"-gcflags=all=-N -l",
+						"-coverprofile=" .. vim.fn.getcwd() .. "/coverage.out",
+					},
 				},
 				["neotest-rust"] = {},
 			},
