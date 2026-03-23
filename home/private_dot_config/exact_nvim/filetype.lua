@@ -10,6 +10,7 @@ vim.filetype.add({
 	},
 	extension = {
 		tmpl = "gotmpl",
+		tpl = "gotmpl",
 		gotmpl = "gotmpl",
 	},
 })
