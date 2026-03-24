@@ -80,6 +80,8 @@ return {
 		"mfussenegger/nvim-dap",
 		config = function()
 			local dap = require("dap")
+			require("dap.ext.vscode").json_decode = require("json5").parse
+
 			-- Go
 			-- Requires:
 			-- * You have initialized your module with 'go mod init module_name'.
@@ -131,31 +133,17 @@ return {
 		end,
 		dependencies = {
 			{
-				"andythigpen/nvim-coverage",
-				version = "*",
+				"Joakker/lua-json5",
+				build = "./install.sh",
+			},
+			{
+				"mr-u0b0dy/crazy-coverage.nvim",
 				config = function()
-					local cov = require("coverage")
-					cov.setup({})
-
-					local show_coverage = false
-					vim.api.nvim_create_user_command("CoverageToggle", function()
-						show_coverage = not show_coverage
-						cov.load(show_coverage)
-						if show_coverage then
-							cov.show()
-						else
-							cov.hide()
-						end
-					end, {
-						nargs = "?",
-						desc = "Coverage Toggle",
-					})
-					vim.api.nvim_create_user_command("CoverageSummary", function()
-						cov.load(show_coverage)
-						cov.summary()
-					end, {
-						nargs = "?",
-						desc = "Coverage Summary",
+					require("crazy-coverage").setup({
+						hit_count = {
+							display = "right_align", -- "eol", "inline", "overlay", "right_align", "sign"
+						},
+						show_branch_summary = true,
 					})
 				end,
 			},
