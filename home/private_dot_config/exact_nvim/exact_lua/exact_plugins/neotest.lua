@@ -18,6 +18,7 @@ return {
 						"-gcflags=all=-N -l",
 						"-coverprofile=" .. vim.fn.getcwd() .. "/coverage.out",
 					},
+					warn_test_name_dupes = false,
 				},
 				["neotest-rust"] = {},
 			},
