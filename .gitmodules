@@ -7,3 +7,6 @@
 [submodule "home/dot_claude/plugins/marketplaces/external_agent-browser"]
 	path = home/dot_claude/plugins/marketplaces/external_agent-browser
 	url = https://github.com/vercel-labs/agent-browser.git
+[submodule "home/dot_claude/plugins/marketplaces/external_superpowers"]
+	path = home/dot_claude/plugins/marketplaces/external_superpowers
+	url = https://github.com/obra/superpowers.git
