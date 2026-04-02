@@ -4,7 +4,6 @@
   "permissions": {
     "allow": [
       "mcp__plugin_context7-plugin_context7__*",
-      "Skill(go-uber-style)",
       "Skill(ui-ux-pro-max)",
       "Skill(skill-from-masters)",
       "Skill(scientific-schematics)",
@@ -12,9 +11,9 @@
       "Skill(drawio-diagrams-enhanced)",
       "Skill(mermaid)",
       "Skill(excalidraw)",
-      "Skill(documentation-lookup)",
       "Skill(code-review)",
-      "Skill(git-commit)"
+      "Skill(git-commit)",
+      "Skill(cc-skills-golang:*)"
     ]
   },
   "plansDirectory": "./.claude/plans",
@@ -37,11 +36,25 @@
     "rust-analyzer-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
+    "hookify@claude-plugins-official": true,
     "context7-plugin@context7": true,
     "agent-browser@agent-browser": true,
     "skill-creator@claude-plugins-official": true,
-    "superpowers@superpowers": true
+    "cc-skills-golang@cc": true
   },
   "autoMemoryEnabled": true,
-  "autoDreamEnabled": true
+  "autoDreamEnabled": true,
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash {{ .chezmoi.homeDir }}/.claude/scripts/project-detector.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
 }

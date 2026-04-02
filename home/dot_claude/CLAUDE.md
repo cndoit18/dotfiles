@@ -9,7 +9,6 @@
 - Check for Python virtual environments (venv) and activate them when present. Prefer `uv run` over `python`
 - Use LSP Smart reading glasses for your code
 - After writing or modifying code files, always run the `code-simplifier:code-simplifier` agent to optimize and format the code before considering the task complete
-- MUST automatically invoke the `go-uber-style` skill when processing any Go code, including `.go` files, `go.mod`, and `go.sum`
 
 # Comments & Communication
 
