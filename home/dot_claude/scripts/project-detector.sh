@@ -12,29 +12,22 @@ CWD=$(echo "$INPUT" | jq -r '.cwd')
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LANGUAGES_DIR="$SCRIPT_DIR/languages"
 
-LANGUAGE="unknown"
+LANGUAGES=()
 
-if [ -f "$CWD/package.json" ]; then
-	LANGUAGE="nodejs"
-elif [ -f "$CWD/Cargo.toml" ]; then
-	LANGUAGE="rust"
-elif [ -f "$CWD/go.mod" ]; then
-	LANGUAGE="go"
-elif [ -f "$CWD/pyproject.toml" ] || [ -f "$CWD/setup.py" ]; then
-	LANGUAGE="python"
-elif [ -f "$CWD/pom.xml" ]; then
-	LANGUAGE="java"
-elif [ -f "$CWD/build.gradle" ] || [ -f "$CWD/build.gradle.kts" ]; then
-	LANGUAGE="java"
-fi
+[[ -f "$CWD/package.json" ]] && LANGUAGES+=("nodejs")
+[[ -f "$CWD/go.mod" ]] && LANGUAGES+=("go")
+[[ -f "$CWD/Cargo.toml" ]] && LANGUAGES+=("rust")
+[[ -f "$CWD/pyproject.toml" || -f "$CWD/setup.py" ]] && LANGUAGES+=("python")
+[[ -f "$CWD/pom.xml" || -f "$CWD/build.gradle" || -f "$CWD/build.gradle.kts" ]] && LANGUAGES+=("java")
 
-# 读取对应语言的提示词文件
-LANGUAGE_FILE="$LANGUAGES_DIR/${LANGUAGE}.md"
-if [ -f "$LANGUAGE_FILE" ]; then
-	ADDITIONAL_CONTEXT=$(cat "$LANGUAGE_FILE")
-else
-	exit 0
-fi
+ADDITIONAL_CONTEXT=""
+for LANGUAGE in "${LANGUAGES[@]}"; do
+	LANGUAGE_FILE="$LANGUAGES_DIR/${LANGUAGE}.md"
+	if [ -f "$LANGUAGE_FILE" ]; then
+		ADDITIONAL_CONTEXT+="\n\n# **$LANGUAGE**\n"
+		ADDITIONAL_CONTEXT+="$(cat "$LANGUAGE_FILE")"
+	fi
+done
 
 # 返回JSON格式的额外上下文
 jq -n --arg ctx "$ADDITIONAL_CONTEXT" '{
