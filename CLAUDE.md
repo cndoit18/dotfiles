@@ -2,60 +2,63 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Type
+## Architecture
 
-This is a **chezmoi dotfiles repository** - it manages personal configuration files (dotfiles) across multiple machines using chezmoi.
-
-## Directory Structure
-
-```
-home/                    # Source state (what gets deployed)
-├── dot_claude/          # Claude Code configuration
-├── dot_zshrc.tmpl       # Shell configuration
-├── private_dot_config/  # Private config files
-├── exact_dot_oh-my-zsh/ # Oh My Zsh configuration
-└── .chezmoiscripts/     # Post-apply scripts
-.claude/                 # Claude Code settings (project-level)
-.gitmodules             # Git submodules for plugins
-```
-
-## Common Commands
-
-- `chezmoi add <file>` - Add existing file to source state
-- `chezmoi edit <file>` - Edit file in source state
-- `chezmoi diff` - Show pending changes
-- `chezmoi apply` - Apply pending changes
-- `chezmoi apply -n` - Dry run
-- `chezmoi source` - Open source directory
+This is a **chezmoi dotfiles repository**. The `.chezmoiroot` file redirects the source state to `home/` — all managed dotfiles live under `home/`, not the repo root. Everything inside `home/` maps to `~/`.
 
 ## File Naming Conventions
 
-| Prefix | Meaning |
-|--------|---------|
-| `dot_` | Creates hidden file (e.g., `dot_zshrc` → `~/.zshrc`) |
-| `exact_` | Exact path match |
-| `private_` | Private file (not committed to repo) |
-| `.tmpl` | Template file using Go text/template |
+| Prefix/Suffix | Meaning |
+|---------------|---------|
+| `dot_` | Hidden file (`dot_zshrc` → `~/.zshrc`) |
+| `exact_` | Directory managed exactly (extra files removed on apply) |
+| `private_` | File with restricted permissions |
+| `.tmpl` | Go `text/template` file, evaluated at apply time |
+| `noexact_*` | Escape hatch — prevents `exact_` parent from deleting this entry |
 
-## Template Functions
+Prefixes combine: `private_dot_config/` → `~/.config/` with restricted permissions.
 
-- `onepasswordRead "op://..."` - Read from 1Password vault
-- `env "VAR"` - Read environment variable
-- `{{ .chezmoi.hostname }}` - Current hostname
-- `{{ .chezmoi.os }}` - Operating system (darwin/linux)
+## Template System
+
+Templates (`.tmpl` files) use Go `text/template` with chezmoi extensions:
+
+- `onepasswordRead "op://vault/item/field"` — read secrets from 1Password (all secrets use this)
+- `{{ .chezmoi.os }}` — `darwin` or `linux`
+- `{{ .chezmoi.hostname }}` — machine hostname
+- Software versions in `.chezmoidata.toml` (Go, Python, Node.js) — referenced as `{{ .go }}`, `{{ .python }}`, etc.
+
+**1Password CLI is required** — template evaluation fails without it since all secrets (GitHub token, AI tokens, Context7 token) are pulled via `onepasswordRead`.
+
+## OS-Conditional Scripts
+
+Scripts under `.chezmoiscripts/darwin/` and `.chezmoiscripts/linux/` run only on the matching OS (controlled by `.chezmoiignore.tmpl`). Cross-platform scripts live directly in `.chezmoiscripts/`.
 
 ## Git Submodules
 
-This project uses git submodules for external plugins:
-- `home/dot_claude/plugins/marketplaces/external_claude-plugins-official`
-- `home/dot_claude/plugins/marketplaces/external_context7-marketplace`
-- `home/dot_claude/plugins/marketplaces/external_agent-browser`
+Four submodules under `home/dot_claude/plugins/marketplaces/`:
 
-Run `git submodule update --init --recursive` after cloning to initialize submodules.
+```
+git submodule update --init --recursive   # Required after cloning
+```
 
-## Working with This Project
+## Key Paths
 
-1. Edit files in the `home/` directory (source state)
-2. Test changes with `chezmoi diff`
-3. Apply with `chezmoi apply`
-4. Commit changes to version control
+- `home/.chezmoidata.toml` — software version pins
+- `home/.chezmoi.toml.tmpl` — chezmoi config (hooks, data, 1Password refs)
+- `home/.chezmoiexternal.toml.tmpl` — external dependencies (fonts, oh-my-zsh, zsh plugins)
+- `home/.chezmoiignore.tmpl` — OS-conditional ignore rules
+- `home/.chezmoiscripts/` — install scripts triggered on version changes
+- `home/dot_claude/` — Claude Code config (skills, plugins, settings)
+- `home/private_dot_config/` — app configs (nvim, lazygit, wezterm, starship)
+
+## Gotchas
+
+- **gvm fork**: Install scripts use `cndoit18/gvm` (personal fork), not upstream gvm
+- **Submodule-based plugins**: Claude marketplace plugins are git submodules — update them with `git submodule update --remote` rather than editing in-place
+- **Large .venv in skills**: `scientific-schematics` and `prompt-engineering-patterns` skills contain full Python venvs in source state
+
+## Commits
+
+Conventional commits with scopes: `type(scope): description`
+
+Common scopes: `claude`, `nvim`, `deps`, `go`, `git`, `zsh`
