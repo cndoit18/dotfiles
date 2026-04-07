@@ -10,3 +10,6 @@
 [submodule "home/dot_claude/plugins/marketplaces/external_cc"]
 	path = home/dot_claude/plugins/marketplaces/external_cc
 	url = https://github.com/samber/cc.git
+[submodule "home/dot_claude/plugins/marketplaces/external_agents"]
+	path = home/dot_claude/plugins/marketplaces/external_agents
+	url = https://github.com/wshobson/agents.git
