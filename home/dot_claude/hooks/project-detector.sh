@@ -20,6 +20,10 @@ LANGUAGES=()
 [[ -f "$CWD/pyproject.toml" || -f "$CWD/setup.py" ]] && LANGUAGES+=("python")
 [[ -f "$CWD/pom.xml" || -f "$CWD/build.gradle" || -f "$CWD/build.gradle.kts" ]] && LANGUAGES+=("java")
 
+if [[ ${#LANGUAGES[@]} -eq 0 ]]; then
+	exit 0
+fi
+
 ADDITIONAL_CONTEXT=""
 for LANGUAGE in "${LANGUAGES[@]}"; do
 	LANGUAGE_FILE="$LANGUAGES_DIR/${LANGUAGE}.md"
