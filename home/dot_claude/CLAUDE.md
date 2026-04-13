@@ -12,7 +12,7 @@
 
 ## After Writing Code
 
-- Run `code-simplifier:code-simplifier` agent to optimize and format the code before considering the task complete
+- Run `simplify` skill to review changed code for reuse, quality, and efficiency, then fix any issues found
 - Verify the code follows deep module principles from the design philosophy skill
 
 # Comments & Communication
