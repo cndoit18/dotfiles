@@ -91,7 +91,7 @@ return {
 				port = "${port}",
 				executable = {
 					command = vim.fn.stdpath("data") .. "/mason/bin/dlv",
-					args = { "dap", "-l", "127.0.0.1:${port}" },
+					args = { "dap", "--check-go-version=false", "-l", "127.0.0.1:${port}" },
 				},
 			}
 			dap.adapters.go = dap.adapters.delve
