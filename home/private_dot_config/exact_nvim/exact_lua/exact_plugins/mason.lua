@@ -9,6 +9,7 @@ return {
 	config = function()
 		local tools = {
 			-- Formatter
+			"delve",
 			"stylua",
 			"sqlfluff",
 			"shfmt",
