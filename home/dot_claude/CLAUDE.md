@@ -1,6 +1,6 @@
 # Core Rules
 
-- Address me as `cndoit18` in every response
+- Address me as `翰` in every response
 
 # Development Rules
 
