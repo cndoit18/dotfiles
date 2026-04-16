@@ -1,14 +1,21 @@
 return {
 	"mhartington/formatter.nvim",
 	lazy = false,
+	keys = {
+		{
+			"<leader>F",
+			function()
+				vim.g.enable_autoformat = not vim.g.enable_autoformat
+				print("autoformat is " .. (vim.g.enable_autoformat and "on" or "off"))
+			end,
+			desc = "Toggle Autoformat",
+		},
+	},
 	config = function()
 		local prettier = require("formatter.defaults").prettier
 		require("formatter").setup({
-			-- Enable or disable logging
 			logging = true,
-			-- Set the log level
 			log_level = vim.log.levels.WARN,
-			-- All formatter configurations are opt-in
 			filetype = {
 				lua = { require("formatter.filetypes.lua").stylua },
 				sql = {
@@ -30,13 +37,13 @@ return {
 				go = { require("formatter.filetypes.go").gofumpt },
 				rust = { require("formatter.filetypes.rust").rustfmt },
 
-				glsl = { prettier }, -- to work install prettier-plugin-glsl and add it to the prettier config: `plugins: ["prettier-plugin-glsl"]`
+				glsl = { prettier },
 				svelte = { prettier },
 				javascript = { prettier },
 				javascriptreact = { prettier },
 				typescript = { prettier },
 				typescriptreact = { prettier },
-				astro = { prettier }, -- prettier-plugin-astro
+				astro = { prettier },
 				vue = { prettier },
 				css = { prettier },
 				scss = { prettier },
@@ -64,10 +71,5 @@ return {
 			group = format_augroup,
 			command = "if get(g:,'enable_autoformat', 1) | :FormatWrite | endif",
 		})
-
-		vim.api.nvim_create_user_command("ToggleAutoFormat", function(_)
-			vim.g.enable_autoformat = not vim.g.enable_autoformat
-			print("autoformat is " .. (vim.g.enable_autoformat and "on" or "off"))
-		end, { nargs = "?" })
 	end,
 }

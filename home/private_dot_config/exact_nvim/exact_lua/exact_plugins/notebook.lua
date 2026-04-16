@@ -6,12 +6,14 @@ return {
 			function()
 				require("notebook-navigator").move_cell("d")
 			end,
+			desc = "Next cell",
 		},
 		{
 			"[h",
 			function()
 				require("notebook-navigator").move_cell("u")
 			end,
+			desc = "Previous cell",
 		},
 	},
 	dependencies = {
@@ -39,9 +41,6 @@ return {
 				})
 			end,
 		},
-		-- "akinsho/toggleterm.nvim", -- alternative repl provider
-		-- "benlubas/molten-nvim", -- alternative repl provider
-		-- "anuvyklack/hydra.nvim",
 		{ "GCBallesteros/jupytext.nvim", build = "uv tool install jupytext", config = true, lazy = false },
 	},
 	event = "VeryLazy",
@@ -53,18 +52,14 @@ return {
 			cell_highlight_group = "Folded",
 		})
 		vim.api.nvim_create_user_command("JupyterCreate", function(opts)
-			-- 获取用户传入的参数
 			local full_path = opts.args
-			-- 提取文件夹路径和文件名
 			local dir_path = full_path:match("(.*/)") or ""
 			local file_name = full_path:match("[^/]+$")
-			-- 构建要执行的命令
 			local command = string.format(
 				'!echo \'{"cells":[],"metadata":{"kernelspec":{"display_name":"Python 3 (ipykernel)","language":"python","name":"python3"}},"nbformat":4,"nbformat_minor":5}\' | jupyter nbconvert --to notebook --execute --stdin --output-dir=%s --output=%s',
 				dir_path,
 				file_name
 			)
-			-- 执行命令
 			vim.cmd(command)
 		end, { nargs = 1, complete = "file", desc = "Create a Jupyter notebook with the given path and filename" })
 

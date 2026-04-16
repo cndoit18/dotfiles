@@ -4,23 +4,20 @@ return {
 	branch = "v3.x",
 	cmd = "Neotree",
 	keys = {
-		{ "<leader>nt", [[:Neotree toggle<CR>]] },
-		{ "<leader>nf", [[:Neotree focus<CR>]] },
+		{ "<leader>n", nil, desc = "Neo-tree" },
+		{ "<leader>nt", [[:Neotree toggle<CR>]], desc = "Toggle file tree" },
+		{ "<leader>nf", [[:Neotree focus<CR>]], desc = "Focus file tree" },
 	},
 	dependencies = {
-		{ "nvim-lualine/lualine.nvim" },
 		{ "nvim-lua/plenary.nvim" },
-		{ "nvim-tree/nvim-web-devicons" }, -- not strictly required, but recommended
+		{ "nvim-tree/nvim-web-devicons" },
 		{ "MunifTanjim/nui.nvim" },
-		-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 		{
 			"s1n7ax/nvim-window-picker",
 			lazy = true,
 			opts = {
 				filter_rules = {
-					-- filter using buffer options
 					bo = {
-						-- if the file type is one of following, the window will be ignored
 						filetype = {
 							"neo-tree",
 							"neo-tree-popup",
@@ -31,8 +28,6 @@ return {
 							"fugitive",
 							"fugitiveblame",
 						},
-
-						-- if the buffer type is one of following, the window will be ignored
 						buftype = { "nofile", "help", "terminal" },
 					},
 				},
@@ -70,37 +65,18 @@ return {
 			commands = {
 				delete = function(state)
 					local path = state.tree:get_node().path
-					vim.fn.system({ "trash", vim.fn.fnameescape(path) })
+					vim.fn.system({ "trash", path })
 					require("neo-tree.sources.manager").refresh(state.name)
 				end,
 				system_open = function(state)
-					local node = state.tree:get_node()
-					local path = node:get_id()
-					local getOS = function()
-						local handle = io.popen("uname -s")
-						if handle == nil then
-							vim.notify("Error while opening handler", vim.log.levels.ERROR)
-							return ""
-						end
-						local uname = handle:read("*a")
-						handle:close()
-						uname = uname:gsub("%s+", "")
-						if uname == "Darwin" then
-							return "Darwin"
-						elseif uname == "NixOS" then
-							return "NixOS"
-						elseif uname == "Linux" then
-							return "Linux"
-						else
-							return ""
-						end
-					end
-					if getOS() == "Darwin" then
+					local path = state.tree:get_node():get_id()
+					local sysname = vim.uv.os_uname().sysname
+					if sysname == "Darwin" then
 						vim.api.nvim_command("silent !open -g " .. path)
-					elseif getOS() == "Linux" then
+					elseif sysname == "Linux" then
 						vim.api.nvim_command(string.format("silent !xdg-open '%s'", path))
 					else
-						vim.notify("Could not determine OS", vim.log.levels.ERROR)
+						vim.notify("Unsupported OS: " .. sysname, vim.log.levels.ERROR)
 					end
 				end,
 			},
@@ -117,9 +93,6 @@ return {
 			["z"] = "none",
 		} },
 	},
-	init = function()
-		table.insert(require("lualine").get_config().extensions, "neo-tree")
-	end,
 	config = function(_, opts)
 		require("neo-tree").setup(opts)
 		vim.api.nvim_create_autocmd("TermClose", {
