@@ -16,6 +16,8 @@ vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.o.fillchars = "eob: ,fold: ,foldopen:▾,foldsep: ,foldclose:▸"
 
+vim.o.swapfile = false
+
 local undodir = vim.fn.stdpath("data") .. "/undodir"
 vim.fn.mkdir(undodir, "p")
 vim.opt.undodir = undodir

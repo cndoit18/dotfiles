@@ -11,7 +11,6 @@ return {
 	{
 		"folke/snacks.nvim",
 		keys = {
-			{ "<leader>g", nil, desc = "Git" },
 			{
 				"<leader>go",
 				function()

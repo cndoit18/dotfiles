@@ -23,7 +23,6 @@ return {
 		},
 	},
 	keys = {
-		{ "<leader>t", nil, desc = "Test" },
 		{
 			"<leader>tt",
 			function()

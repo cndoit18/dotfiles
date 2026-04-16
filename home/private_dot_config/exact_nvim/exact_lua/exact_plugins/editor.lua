@@ -6,6 +6,18 @@ return {
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
+		opts = {
+			spec = {
+				{ "<leader>f", group = "Find", icon = " " },
+				{ "<leader>a", group = "AI/Claude Code", icon = " " },
+				{ "<leader>t", group = "Test", icon = " " },
+				{ "<leader>d", group = "Debug", icon = " " },
+				{ "<leader>g", group = "Git", icon = " " },
+				{ "<leader>n", group = "Neo-tree", icon = " " },
+				{ "<leader>x", group = "Diagnostics", icon = " " },
+				{ "<leader>l", group = "LSP", icon = " " },
+			},
+		},
 		keys = {
 			{
 				"<leader>?",

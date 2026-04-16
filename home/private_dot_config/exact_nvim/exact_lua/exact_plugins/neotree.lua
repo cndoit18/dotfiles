@@ -4,7 +4,6 @@ return {
 	branch = "v3.x",
 	cmd = "Neotree",
 	keys = {
-		{ "<leader>n", nil, desc = "Neo-tree" },
 		{ "<leader>nt", [[:Neotree toggle<CR>]], desc = "Toggle file tree" },
 		{ "<leader>nf", [[:Neotree focus<CR>]], desc = "Focus file tree" },
 	},

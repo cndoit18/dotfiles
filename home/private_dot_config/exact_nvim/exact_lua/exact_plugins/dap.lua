@@ -2,7 +2,6 @@ return {
 	{
 		"mfussenegger/nvim-dap",
 		keys = {
-			{ "<leader>d", nil, desc = "Debug" },
 			{
 				"<leader>ds",
 				function()

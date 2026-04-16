@@ -104,7 +104,9 @@ return {
 				}
 				if lsp == "pyright" then
 					config.before_init = function(_, c)
-						c.settings.python.pythonPath = get_python_path(c.root_dir)
+						if c.root_dir then
+							c.settings.python.pythonPath = get_python_path(c.root_dir)
+						end
 					end
 				end
 				if lsp == "harper_ls" then
@@ -143,8 +145,6 @@ return {
 			},
 		},
 		keys = {
-			{ "<leader>x", nil, desc = "Diagnostics" },
-			{ "<leader>l", nil, desc = "LSP" },
 			{
 				"[g",
 				function()
