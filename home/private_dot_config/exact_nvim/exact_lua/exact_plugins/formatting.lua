@@ -1,16 +1,6 @@
 return {
 	"mhartington/formatter.nvim",
 	lazy = false,
-	keys = {
-		{
-			"<leader>F",
-			function()
-				vim.g.enable_autoformat = not vim.g.enable_autoformat
-				print("autoformat is " .. (vim.g.enable_autoformat and "on" or "off"))
-			end,
-			desc = "Toggle Autoformat",
-		},
-	},
 	config = function()
 		local prettier = require("formatter.defaults").prettier
 		require("formatter").setup({
@@ -64,6 +54,12 @@ return {
 		})
 
 		vim.g.enable_autoformat = 1
+
+		vim.api.nvim_create_user_command("ToggleAutoformat", function()
+			vim.g.enable_autoformat = not vim.g.enable_autoformat
+			print("autoformat is " .. (vim.g.enable_autoformat and "on" or "off"))
+		end, { desc = "Toggle auto-format on save" })
+
 		local format_augroup = vim.api.nvim_create_augroup("formatter", { clear = true })
 		vim.api.nvim_create_autocmd({
 			"BufWritePost",
