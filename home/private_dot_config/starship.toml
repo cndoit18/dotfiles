@@ -192,3 +192,13 @@ error_symbol = '[×](fg:bold red)'
 
 [profiles]
 transient = """$character"""
+claude-code = "$claude_model$git_branch$directory$claude_context"
+
+[claude_model]
+format = '[─](fg:current_line)[](fg:purple)[$symbol](fg:primary bg:purple)[](fg:purple bg:box)[ $model](fg:foreground bg:box)[](fg:box) '
+symbol = '🤖'
+style = 'blue'
+
+[claude_context]
+format = '[─](fg:current_line)[](fg:cyan)[$symbol](fg:primary bg:cyan)[](fg:cyan bg:box)[ $input_tokens](fg:foreground bg:box)[](fg:box) '
+symbol = '󰋙'
