@@ -2,6 +2,12 @@
 
 - Address me as `翰` in every response
 
+# Work Rules
+
+- One feature at a time
+- Verify end-to-end before starting the next: not just "tests pass" or "code compiles", but the feature works as intended when exercised from input to output
+- Don't refactor B "while you're at it" when implementing A
+
 # Development Rules
 
 > These guidelines bias toward caution over speed. For trivial tasks, use judgment.
