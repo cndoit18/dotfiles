@@ -1,3 +1,13 @@
+{{- /* User-level settings.local.json is private chezmoi input; Claude Code does not load it directly. */ -}}
+{{- $claudeSettingsExtraPath := joinPath .chezmoi.homeDir ".claude" "settings.local.json" -}}
+{{- $claudeSettingsExtra := dict -}}
+{{- if stat $claudeSettingsExtraPath -}}
+{{- $claudeSettingsExtra = include $claudeSettingsExtraPath | fromJson -}}
+{{- end -}}
+{{- $extraPermissions := dig "permissions" (dict) $claudeSettingsExtra -}}
+{{- $extraEnv := dig "env" (dict) $claudeSettingsExtra -}}
+{{- $extraEnabledPlugins := dig "enabledPlugins" (dict) $claudeSettingsExtra -}}
+{{- $extraHooks := dig "hooks" (dict) $claudeSettingsExtra -}}
 {
   "language": "chinese",
   "outputStyle": "Torvalds",
@@ -9,6 +19,9 @@
       "Skill(lark-*)",
       "Skill(python-development:*)",
       "Skill(deepwiki)"
+      {{- range dig "allow" (list) $extraPermissions }},
+      {{ . | toJson }}
+      {{- end }}
     ]
   },
   "alwaysThinkingEnabled": true,
@@ -23,6 +36,9 @@
     "REVIEW_MODEL": "{{ .ai.models.multimodal }}",
     "DEFAULT_MODEL": "{{ .ai.models.default }}",
     "IMAGE_MODEL": "{{ .ai.models.text2image }}"
+    {{- range $key, $value := $extraEnv }},
+    {{ $key | toJson }}: {{ $value | toJson }}
+    {{- end }}
   },
   "includeCoAuthoredBy": false,
   "enabledPlugins": {
@@ -40,6 +56,9 @@
     "cc-skills-golang@cc": true,
     "deepwiki@deepwiki": true,
     "python-development@agents": true
+    {{- range $key, $value := $extraEnabledPlugins }},
+    {{ $key | toJson }}: {{ $value | toJson }}
+    {{- end }}
   },
   "effortLevel": "high",
   "autoMemoryEnabled": true,
@@ -55,7 +74,13 @@
           }
         ]
       }
+      {{- range dig "UserPromptSubmit" (list) $extraHooks }},
+      {{ . | toJson }}
+      {{- end }}
     ]
+    {{- range $event, $hooks := omit $extraHooks "UserPromptSubmit" }},
+    {{ $event | toJson }}: {{ $hooks | toJson }}
+    {{- end }}
   },
   "statusLine": {
     "type": "command",
