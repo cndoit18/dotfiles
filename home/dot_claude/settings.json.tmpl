@@ -4,13 +4,6 @@
   "permissions": {
     "allow": [
       "mcp__plugin_context7-plugin_context7__*",
-      "Skill(ui-ux-pro-max)",
-      "Skill(skill-from-masters)",
-      "Skill(scientific-schematics)",
-      "Skill(async-python-patterns)",
-      "Skill(drawio-diagrams-enhanced)",
-      "Skill(mermaid)",
-      "Skill(excalidraw)",
       "Skill(commit-commands:*)",
       "Skill(cc-skills-golang:*)",
       "Skill(lark-*)",
@@ -52,17 +45,6 @@
   "autoMemoryEnabled": true,
   "autoDreamEnabled": true,
   "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash {{ .chezmoi.homeDir }}/.claude/hooks/project-detector.sh",
-            "timeout": 5
-          }
-        ]
-      }
-    ],
     "UserPromptSubmit": [
       {
         "hooks": [
