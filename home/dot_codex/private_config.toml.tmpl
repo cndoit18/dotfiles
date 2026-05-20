@@ -5,6 +5,9 @@ network_access = "enabled"
 model_context_window = 1000000
 model_auto_compact_token_limit = 600000
 
+[features]
+memories = true
+
 [model_providers.OpenAI]
 name = "OpenAI"
 base_url = "http://localhost:8080"
