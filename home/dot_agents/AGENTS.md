@@ -49,11 +49,13 @@ Every changed line should trace directly to the request.
 ## Goal-Driven Execution
 
 Transform tasks into verifiable goals:
+
 - "Add validation" → "Write tests for invalid inputs, then make them pass"
 - "Fix the bug" → "Write a test that reproduces it, then make it pass"
 - "Refactor X" → "Ensure tests pass before and after"
 
 For multi-step tasks, state a brief plan:
+
 ```
 1. [Step] → verify: [check]
 2. [Step] → verify: [check]
@@ -80,12 +82,10 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 ## Priority Order (stop after first successful result)
 
-1. `tldr [command]` — common examples
-2. `[command] --help` or `[command] -h` — standard help
-3. `[command]` — default fallback
-4. `[command] [subcommand] --help` — subcommand drill-down
+1. `[command] --help` or `[command] -h` — standard help
+2. `[command]` — default fallback
+3. `[command] [subcommand] --help` — subcommand drill-down
 
 ## Constraints
 
 - **Zero Assumption**: Even for familiar commands, probe first to confirm locally supported flags
-- **Environment Authority**: If `tldr` conflicts with `--help`, use `--help` output as authoritative

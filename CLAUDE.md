@@ -2,63 +2,69 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Architecture
+## Chezmoi Mental Model
 
-This is a **chezmoi dotfiles repository**. The `.chezmoiroot` file redirects the source state to `home/` — all managed dotfiles live under `home/`, not the repo root. Everything inside `home/` maps to `~/`.
+This repository stores chezmoi source state, not literal `$HOME` paths. `.chezmoiroot` points to `home/`, so all managed dotfiles should be edited under `home/`.
 
-## File Naming Conventions
+Always reason in two steps:
 
-| Prefix/Suffix | Meaning |
-|---------------|---------|
-| `dot_` | Hidden file (`dot_zshrc` → `~/.zshrc`) |
-| `exact_` | Directory managed exactly (extra files removed on apply) |
-| `private_` | File with restricted permissions |
-| `.tmpl` | Go `text/template` file, evaluated at apply time |
-| `noexact_*` | Escape hatch — prevents `exact_` parent from deleting this entry |
+1. source state path in this repository
+2. rendered target state under `$HOME`
 
-Prefixes combine: `private_dot_config/` → `~/.config/` with restricted permissions.
+Use `chezmoi source-path <target>` and `chezmoi target-path <source>` when mapping between the two. Do not edit real `$HOME` targets directly or create target-home files at the repository root.
 
-## Template System
+## Source State Naming
 
-Templates (`.tmpl` files) use Go `text/template` with chezmoi extensions:
+chezmoi encodes target behavior in source filenames. Preserve these attributes when moving or editing files:
 
-- `onepasswordRead "op://vault/item/field"` — read secrets from 1Password (all secrets use this)
-- `{{ .chezmoi.os }}` — `darwin` or `linux`
-- `{{ .chezmoi.hostname }}` — machine hostname
-- Software versions in `.chezmoidata.toml` (Go, Python, Node.js) — referenced as `{{ .go }}`, `{{ .python }}`, etc.
+- `dot_` maps to hidden target files
+- `private_` sets restricted permissions
+- `exact_` makes target directories exact, so unmanaged target files may be removed
+- `noexact_` escapes an exact parent
+- `.tmpl` files are Go templates evaluated by chezmoi
 
-**1Password CLI is required** — template evaluation fails without it since all secrets (GitHub token, AI tokens, Context7 token) are pulled via `onepasswordRead`.
+If a change touches an `exact_` directory, consider the deletion behavior before applying it.
 
-## OS-Conditional Scripts
+## Templates and Secrets
 
-Scripts under `.chezmoiscripts/darwin/` and `.chezmoiscripts/linux/` run only on the matching OS (controlled by `.chezmoiignore.tmpl`). Cross-platform scripts live directly in `.chezmoiscripts/`.
+Templates may use chezmoi data, `.chezmoi.*` variables, and `onepasswordRead`.
 
-## Git Submodules
+Do not replace `onepasswordRead` references with literal secrets. Template rendering depends on the 1Password CLI and configured account access.
 
-Four submodules under `home/dot_claude/plugins/marketplaces/`:
+For template changes, verify rendered output with chezmoi instead of guessing.
 
+## Scripts and Apply Semantics
+
+Files with the `run_` attribute are chezmoi scripts; script attributes such as `onchange`, `before`, and `after` can be combined in filenames. `run_onchange_` scripts run when their rendered content changes, and `run_after_` scripts run after target state updates.
+
+In this repo, OS-specific scripts live under `.chezmoiscripts/darwin/` and `.chezmoiscripts/linux/`, with inclusion managed by `.chezmoiignore.tmpl`.
+
+Changing data used inside script templates can trigger package/tool installation on the next apply.
+
+## External Sources
+
+`.chezmoiexternal.toml.tmpl` defines downloaded archives and external files. Prefer changing the external definition; do not treat manual edits to downloaded contents as persistent changes.
+
+## Verification
+
+Prefer chezmoi-aware verification:
+
+```bash
+chezmoi diff
+chezmoi apply --dry-run --verbose
+chezmoi execute-template < path/to/template.tmpl
 ```
-git submodule update --init --recursive   # Required after cloning
-```
 
-## Key Paths
+Use `chezmoi apply` only when the rendered target state is understood.
 
-- `home/.chezmoidata.toml` — software version pins
-- `home/.chezmoi.toml.tmpl` — chezmoi config (hooks, data, 1Password refs)
-- `home/.chezmoiexternal.toml.tmpl` — external dependencies (fonts, oh-my-zsh, zsh plugins)
-- `home/.chezmoiignore.tmpl` — OS-conditional ignore rules
-- `home/.chezmoiscripts/` — install scripts triggered on version changes
-- `home/dot_claude/` — Claude Code config (skills, plugins, settings)
-- `home/private_dot_config/` — app configs (nvim, lazygit, wezterm, starship)
+## Claude Configuration
 
-## Gotchas
+Claude Code configuration is managed as chezmoi source state under `home/`.
 
-- **gvm fork**: Install scripts use `cndoit18/gvm` (personal fork), not upstream gvm
-- **Submodule-based plugins**: Claude marketplace plugins are git submodules — update them with `git submodule update --remote` rather than editing in-place
-- **Large .venv in skills**: `scientific-schematics` and `prompt-engineering-patterns` skills contain full Python venvs in source state
+The global Claude instruction source is `home/dot_agents/AGENTS.md`, which maps to `~/.agents/AGENTS.md`; `home/dot_claude/symlink_CLAUDE.md` creates the target symlink to it.
+
+Claude marketplace plugins are git submodules. Do not edit plugin code in-place; update submodules instead.
 
 ## Commits
 
-Conventional commits with scopes: `type(scope): description`
-
-Common scopes: `claude`, `nvim`, `deps`, `go`, `git`, `zsh`
+Use Conventional Commits with scopes such as `claude`, `nvim`, `deps`, `go`, `git`, and `zsh`.
