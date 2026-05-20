@@ -44,8 +44,4 @@ alias vimdiff='nvim -d'
 eval "$(starship init zsh)"
 {{- end }}
 
-{{- if lookPath "ccr" }}
-eval "$(ccr activate)"
-{{- end }}
-
 unsetopt beep
