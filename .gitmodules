@@ -16,3 +16,6 @@
 [submodule "home/dot_claude/plugins/marketplaces/external_deepwiki-marketplace"]
 	path = home/dot_claude/plugins/marketplaces/external_deepwiki-marketplace
 	url = git@github.com:cndoit18/deepwiki.git
+[submodule "home/dot_claude/plugins/marketplaces/external_obsidian-skills"]
+	path = home/dot_claude/plugins/marketplaces/external_obsidian-skills
+	url = https://github.com/kepano/obsidian-skills.git

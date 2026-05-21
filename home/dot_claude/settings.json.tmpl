@@ -10,7 +10,7 @@
 {{- $extraHooks := dig "hooks" (dict) $claudeSettingsExtra -}}
 {
   "language": "chinese",
-  "outputStyle": "Torvalds",
+  "outputStyle": "Default",
   "permissions": {
     "allow": [
       "mcp__plugin_context7-plugin_context7__*",
@@ -18,7 +18,8 @@
       "Skill(cc-skills-golang:*)",
       "Skill(lark-*)",
       "Skill(python-development:*)",
-      "Skill(deepwiki)"
+      "Skill(deepwiki)",
+      "Bash(obsidian:*)"
       {{- range dig "allow" (list) $extraPermissions }},
       {{ . | toJson }}
       {{- end }}
@@ -42,6 +43,9 @@
   },
   "includeCoAuthoredBy": false,
   "enabledPlugins": {
+    {{- range $key, $value := $extraEnabledPlugins }},
+    {{ $key | toJson }}: {{ $value | toJson }},
+    {{- end }}
     "frontend-design@claude-plugins-official": true,
     "gopls-lsp@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true,
@@ -55,16 +59,31 @@
     "commit-commands@claude-plugins-official": true,
     "cc-skills-golang@cc": true,
     "deepwiki@deepwiki": true,
-    "python-development@agents": true
-    {{- range $key, $value := $extraEnabledPlugins }},
-    {{ $key | toJson }}: {{ $value | toJson }}
-    {{- end }}
+    "python-development@agents": true,
+    "obsidian@obsidian-skills": true
   },
   "effortLevel": "high",
   "autoMemoryEnabled": true,
   "autoDreamEnabled": true,
   "hooks": {
+    "SessionStart": [
+      {{- range dig "SessionStart" (list) $extraHooks }}
+      {{ . | toJson }},
+      {{- end }}
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash {{ .chezmoi.homeDir }}/.claude/hooks/memory-palace.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
     "UserPromptSubmit": [
+      {{- range dig "UserPromptSubmit" (list) $extraHooks }}
+      {{ . | toJson }},
+      {{- end }}
       {
         "hooks": [
           {
@@ -74,11 +93,8 @@
           }
         ]
       }
-      {{- range dig "UserPromptSubmit" (list) $extraHooks }},
-      {{ . | toJson }}
-      {{- end }}
     ]
-    {{- range $event, $hooks := omit $extraHooks "UserPromptSubmit" }},
+    {{- range $event, $hooks := omit $extraHooks "UserPromptSubmit" "SessionStart" }},
     {{ $event | toJson }}: {{ $hooks | toJson }}
     {{- end }}
   },
