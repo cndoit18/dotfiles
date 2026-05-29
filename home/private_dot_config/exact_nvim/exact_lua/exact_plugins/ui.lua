@@ -62,7 +62,9 @@ return {
 					vim.schedule(function()
 						vim.bo[ctx.buf].filetype = ctx.ft
 					end)
-					vim.cmd("LspStop")
+					for _, client in ipairs(vim.lsp.get_clients({ bufnr = ctx.buf })) do
+						vim.lsp.buf_detach_client(ctx.buf, client.id)
+					end
 					vim.opt.swapfile = false
 					vim.opt.writebackup = false
 					vim.opt.spell = false
