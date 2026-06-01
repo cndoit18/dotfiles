@@ -66,7 +66,7 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 ## After Writing Code
 
-- Run `simplify` skill to review changed code for reuse, quality, and efficiency, then fix any issues found
+- Run `code-review` skill to review changed code for reuse, quality, and efficiency, then fix any issues found
 - Verify the code follows deep module principles from the design philosophy skill
 
 # Comments & Communication
