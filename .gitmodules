@@ -19,3 +19,6 @@
 [submodule "home/dot_claude/plugins/marketplaces/external_obsidian-skills"]
 	path = home/dot_claude/plugins/marketplaces/external_obsidian-skills
 	url = https://github.com/kepano/obsidian-skills.git
+[submodule "home/dot_claude/plugins/marketplaces/external_lark-skills-for-claude-code"]
+	path = home/dot_claude/plugins/marketplaces/external_lark-skills-for-claude-code
+	url = git@github.com:cndoit18/lark-skills-for-claude-code.git

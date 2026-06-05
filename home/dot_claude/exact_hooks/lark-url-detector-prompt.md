@@ -12,30 +12,30 @@ A Lark/Feishu URL was detected. You **MUST** follow this protocol. Deviations ar
 
 Match the URL path segment against these keywords (first match wins):
 
-| URL Path Keywords         | Skill              | Resource Type    |
-| ------------------------- | ------------------ | ---------------- |
-| `docx`, `doc`             | `/lark-doc`        | Document         |
-| `sheets`, `sheet`         | `/lark-sheets`     | Spreadsheet      |
-| `base`, `bitable`         | `/lark-base`       | Base (Bitable)   |
-| `drive`, `folder`, `file` | `/lark-drive`      | Drive            |
-| `wiki`, `ospace`          | `/lark-wiki`       | Wiki             |
-| `slides`, `presentation`  | `/lark-slides`     | Slides           |
-| `im`, `chat`, `message`   | `/lark-im`         | Messaging        |
-| `whiteboard`, `board`     | `/lark-whiteboard` | Whiteboard       |
-| `calendar`                | `/lark-calendar`   | Calendar         |
-| `mail`                    | `/lark-mail`       | Mail             |
-| `task`, `todo`            | `/lark-task`       | Task             |
-| `vc`, `meeting`           | `/lark-vc`         | Video Conference |
-| `minutes`                 | `/lark-minutes`    | Minutes          |
-| `approval`                | `/lark-approval`   | Approval         |
-| `contacts`                | `/lark-contact`    | Contacts         |
-| `attendance`, `打卡`       | `/lark-attendance` | Attendance       |
-| `event`, `events`         | `/lark-event`      | Event Subscription |
+| URL Path Keywords             | Skill                            | Resource Type            |
+| ----------------------------- | -------------------------------- | ------------------------ |
+| `docx`, `doc`                 | `/lark-doc`                      | Document                 |
+| `sheets`, `sheet`             | `/lark-sheets`                   | Spreadsheet              |
+| `base`, `bitable`             | `/lark-base`                     | Base (Bitable)           |
+| `drive`, `folder`, `file`     | `/lark-drive`                    | Drive                    |
+| `wiki`, `ospace`              | `/lark-wiki`                     | Wiki                     |
+| `slides`, `presentation`      | `/lark-slides`                   | Slides                   |
+| `im`, `chat`, `message`       | `/lark-im`                       | Messaging                |
+| `whiteboard`, `board`         | `/lark-whiteboard`               | Whiteboard               |
+| `calendar`                    | `/lark-calendar`                 | Calendar                 |
+| `mail`                        | `/lark-mail`                     | Mail                     |
+| `task`, `todo`                | `/lark-task`                     | Task                     |
+| `vc`, `meeting`               | `/lark-vc`                       | Video Conference         |
+| `minutes`                     | `/lark-minutes`                  | Minutes                  |
+| `approval`                    | `/lark-approval`                 | Approval                 |
+| `contacts`                    | `/lark-contact`                  | Contacts                 |
+| `attendance`, `打卡`          | `/lark-attendance`               | Attendance               |
+| `event`, `events`             | `/lark-event`                    | Event Subscription       |
 | `workflow`, `meeting-summary` | `/lark-workflow-meeting-summary` | Meeting Summary Workflow |
-| `workflow`, `standup`     | `/lark-workflow-standup-report` | Standup Report Workflow |
-| `skill-maker`             | `/lark-skill-maker` | Skill Creation   |
-| `whiteboard-cli`          | `/lark-whiteboard-cli` | Whiteboard CLI   |
-| `shared`, `config`        | `/lark-shared`     | Shared Configuration |
+| `workflow`, `standup`         | `/lark-workflow-standup-report`  | Standup Report Workflow  |
+| `skill-maker`                 | `/lark-skill-maker`              | Skill Creation           |
+| `whiteboard-cli`              | `/lark-whiteboard-cli`           | Whiteboard CLI           |
+| `shared`, `config`            | `/lark-shared`                   | Shared Configuration     |
 
 ### Fallback Strategy
 

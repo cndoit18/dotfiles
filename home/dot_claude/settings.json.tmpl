@@ -13,16 +13,17 @@
   "outputStyle": "Default",
   "permissions": {
     "allow": [
+      {{- range dig "allow" (list) $extraPermissions }},
+      {{ . | toJson }},
+      {{- end }}
       "mcp__plugin_context7-plugin_context7__*",
       "Skill(commit-commands:*)",
       "Skill(cc-skills-golang:*)",
       "Skill(lark-*)",
       "Skill(python-development:*)",
       "Skill(deepwiki)",
-      "Bash(obsidian:*)"
-      {{- range dig "allow" (list) $extraPermissions }},
-      {{ . | toJson }}
-      {{- end }}
+      "Bash(obsidian:*)",
+      "Skill(lark-skills:*)"
     ]
   },
   "alwaysThinkingEnabled": true,
@@ -60,7 +61,8 @@
     "cc-skills-golang@cc": true,
     "deepwiki@deepwiki": true,
     "python-development@agents": true,
-    "obsidian@obsidian-skills": true
+    "obsidian@obsidian-skills": true,
+    "lark-skills@lark-skills-for-claude-code": true
   },
   "effortLevel": "high",
   "autoMemoryEnabled": true,
