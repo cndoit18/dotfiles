@@ -68,6 +68,9 @@
   "autoMemoryEnabled": true,
   "autoDreamEnabled": true,
   "hooks": {
+    {{- range $event, $hooks := omit $extraHooks "PermissionRequest" "SessionStart" }}
+    {{ $event | toJson }}: {{ $hooks | toJson }},
+    {{- end }}
     "PermissionRequest": [
       {{- range dig "PermissionRequest" (list) $extraHooks }}
       {{ . | toJson }},
@@ -96,24 +99,7 @@
           }
         ]
       }
-    ],
-    "UserPromptSubmit": [
-      {{- range dig "UserPromptSubmit" (list) $extraHooks }}
-      {{ . | toJson }},
-      {{- end }}
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash {{ .chezmoi.homeDir }}/.claude/hooks/lark-url-detector.sh",
-            "timeout": 5
-          }
-        ]
-      }
     ]
-    {{- range $event, $hooks := omit $extraHooks "PermissionRequest" "UserPromptSubmit" "SessionStart" }},
-    {{ $event | toJson }}: {{ $hooks | toJson }}
-    {{- end }}
   },
   "statusLine": {
     "type": "command",
