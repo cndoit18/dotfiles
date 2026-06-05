@@ -66,6 +66,21 @@
   "autoMemoryEnabled": true,
   "autoDreamEnabled": true,
   "hooks": {
+    "PermissionRequest": [
+      {{- range dig "PermissionRequest" (list) $extraHooks }}
+      {{ . | toJson }},
+      {{- end }}
+      {
+        "matcher": "Read|Grep|Glob|Bash|Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash {{ .chezmoi.homeDir }}/.claude/hooks/memory-palace-permission.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
     "SessionStart": [
       {{- range dig "SessionStart" (list) $extraHooks }}
       {{ . | toJson }},
@@ -94,7 +109,7 @@
         ]
       }
     ]
-    {{- range $event, $hooks := omit $extraHooks "UserPromptSubmit" "SessionStart" }},
+    {{- range $event, $hooks := omit $extraHooks "PermissionRequest" "UserPromptSubmit" "SessionStart" }},
     {{ $event | toJson }}: {{ $hooks | toJson }}
     {{- end }}
   },
