@@ -73,9 +73,6 @@
     {{ $event | toJson }}: {{ $hooks | toJson }},
     {{- end }}
     "PermissionRequest": [
-      {{- range dig "PermissionRequest" (list) $extraHooks }}
-      {{ . | toJson }},
-      {{- end }}
       {
         "matcher": "Read|Grep|Glob|Bash|Skill",
         "hooks": [
@@ -86,11 +83,11 @@
           }
         ]
       }
+      {{- range dig "PermissionRequest" (list) $extraHooks }},
+      {{ . | toJson }}
+      {{- end }}
     ],
     "SessionStart": [
-      {{- range dig "SessionStart" (list) $extraHooks }}
-      {{ . | toJson }},
-      {{- end }}
       {
         "hooks": [
           {
@@ -100,6 +97,9 @@
           }
         ]
       }
+      {{- range dig "SessionStart" (list) $extraHooks }},
+      {{ . | toJson }}
+      {{- end }}
     ]
   },
   "statusLine": {
