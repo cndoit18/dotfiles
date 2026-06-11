@@ -22,3 +22,6 @@
 [submodule "home/dot_claude/plugins/marketplaces/external_lark-skills-for-claude-code"]
 	path = home/dot_claude/plugins/marketplaces/external_lark-skills-for-claude-code
 	url = git@github.com:cndoit18/lark-skills-for-claude-code.git
+[submodule "home/dot_claude/plugins/marketplaces/external_understand-anything"]
+	path = home/dot_claude/plugins/marketplaces/external_understand-anything
+	url = git@github.com:Egonex-AI/Understand-Anything.git
