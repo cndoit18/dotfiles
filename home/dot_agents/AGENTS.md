@@ -2,11 +2,20 @@
 
 - Address me as `翰` in every response
 
+# Default Operating Mode
+
+- Make the smallest safe change that satisfies the request.
+- Prefer a direct fix, direct answer, or direct verification over broad exploration.
+- For simple edits, merge conflicts, version bumps, Dockerfile/shell fixes, config updates, and verification tasks: do not redesign, broaden scope, launch agents, or run broad reviews unless explicitly asked.
+- Run the focused validation needed to prove the requested outcome; when it passes, summarize the evidence and stop.
+- If the user asks whether something can be fixed without code changes, present no-code/config options before proposing code edits.
+
 # Work Rules
 
 - One feature at a time
 - Verify end-to-end before starting the next: not just "tests pass" or "code compiles", but the feature works as intended when exercised from input to output
 - Don't refactor B "while you're at it" when implementing A
+- Do not continue into adjacent cleanup, unrelated reviews, or speculative improvements after the requested task is complete.
 
 # Development Rules
 
@@ -16,14 +25,24 @@
 
 - State assumptions explicitly. If uncertain, ask.
 - If multiple interpretations exist, present them — don't pick silently.
+- Before non-trivial edits, give a 5-line execution contract: exact goal, files likely touched, non-goals, validation command, and stop condition.
+- If the likely source path, environment, or acceptable fix type is unclear, ask one targeted question before running broad diagnostics or editing.
 - If a simpler approach exists, say so. Push back when warranted.
 - If something is unclear, stop. Name what's confusing. Ask.
+
+## Evidence-First Debugging
+
+- Start debugging read-only unless the user explicitly approves mutation.
+- Identify the target environment, instance/request/user ID, API or command, and exact symptom before investigating.
+- Gather focused evidence from logs, config, runtime state, database rows, or tests with output capped by default; expand only when the missing context is necessary to prove or disprove the hypothesis.
+- Separate evidence from hypothesis. State confidence and what fact would disprove the current hypothesis.
 
 ## Before Writing Code
 
 - Load `software-design-philosophy-skill` skill — evaluate module depth, information hiding, complexity, and error handling before implementing
 - Use LSP operations (hover, goToDefinition, findReferences) to understand existing code before modifying it
 - Use `Context7` MCP for library/API documentation, code generation, setup, and configuration
+- Do not use agents for narrow tasks unless the user asks or the task genuinely requires broad parallel research.
 
 ## Simplicity First
 
@@ -64,10 +83,16 @@ For multi-step tasks, state a brief plan:
 
 Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
 
-## After Writing Code
+## Verification / Definition of Done
 
-- Run `code-review` skill to review changed code for reuse, quality, and efficiency, then fix any issues found
-- Verify the code follows deep module principles from the design philosophy skill
+- After editing, run the narrowest validator that can prove the requested outcome and report the command.
+- Validate JSON/templates with `python -m json.tool`, `jq`, or rendered-template validation.
+- Validate shell with `bash -n`.
+- Validate Python with targeted `pytest` or `python -m py_compile`.
+- Validate Go with `go test` for touched packages.
+- Validate config manifests with their repo-specific render/validate command.
+- For UI or user-facing behavior, exercise the feature from input to output before claiming success.
+- When verification passes and the requested task is complete, stop instead of expanding into new work.
 
 # Comments & Communication
 
@@ -75,17 +100,4 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 - Document non-obvious behavior and edge cases
 - Include links to relevant documentation or issues
 - Keep comments current with code changes
-
-# CLI Discovery Protocol
-
-> Before using any CLI tool, read its documentation or help output first.
-
-## Priority Order (stop after first successful result)
-
-1. `[command] --help` or `[command] -h` — standard help
-2. `[command]` — default fallback
-3. `[command] [subcommand] --help` — subcommand drill-down
-
-## Constraints
-
-- **Zero Assumption**: Even for familiar commands, probe first to confirm locally supported flags
+- Keep user-facing updates brief, evidence-based, and scoped to the current task.
