@@ -12,6 +12,7 @@
   "language": "chinese",
   "outputStyle": "Default",
   "permissions": {
+    "defaultMode": "auto",
     "allow": [
       {{- range dig "allow" (list) $extraPermissions }},
       {{ . | toJson }},
