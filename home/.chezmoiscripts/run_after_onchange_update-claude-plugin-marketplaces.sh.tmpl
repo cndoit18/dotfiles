@@ -1,0 +1,5 @@
+#!/bin/bash
+# Trigger: {{ output "cat" (joinPath .chezmoi.homeDir ".claude/plugins/known_marketplaces.json") | sha256sum }}
+
+set -e
+claude plugin marketplace update

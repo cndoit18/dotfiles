@@ -25,3 +25,6 @@
 [submodule "home/dot_claude/plugins/marketplaces/external_understand-anything"]
 	path = home/dot_claude/plugins/marketplaces/external_understand-anything
 	url = git@github.com:Egonex-AI/Understand-Anything.git
+[submodule "home/dot_claude/plugins/marketplaces/external_ui-ux-pro-max-skill"]
+	path = home/dot_claude/plugins/marketplaces/external_ui-ux-pro-max-skill
+	url = git@github.com:nextlevelbuilder/ui-ux-pro-max-skill.git
