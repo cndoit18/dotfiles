@@ -28,3 +28,6 @@
 [submodule "home/dot_claude/plugins/marketplaces/external_ui-ux-pro-max-skill"]
 	path = home/dot_claude/plugins/marketplaces/external_ui-ux-pro-max-skill
 	url = git@github.com:nextlevelbuilder/ui-ux-pro-max-skill.git
+[submodule "home/dot_claude/plugins/marketplaces/external_taste-skill"]
+	path = home/dot_claude/plugins/marketplaces/external_taste-skill
+	url = git@github.com:Leonxlnx/taste-skill.git
