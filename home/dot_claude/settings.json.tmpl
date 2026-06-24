@@ -8,6 +8,7 @@
 {{- $extraEnv := dig "env" (dict) $claudeSettingsExtra -}}
 {{- $extraEnabledPlugins := dig "enabledPlugins" (dict) $claudeSettingsExtra -}}
 {{- $extraHooks := dig "hooks" (dict) $claudeSettingsExtra -}}
+{{- $extraAutoMode := dig "autoMode" (dict) $claudeSettingsExtra -}}
 {
   "language": "chinese",
   "outputStyle": "Default",
@@ -25,6 +26,32 @@
       "Skill(deepwiki)",
       "Bash(obsidian:*)",
       "Skill(lark-skills:*)"
+    ]
+  },
+  "autoMode": {
+    "environment": [
+      {{- range $i, $v := dig "environment" (list "$defaults") $extraAutoMode }}
+      {{- if $i }},{{ end }}
+      {{ $v | toJson }}
+      {{- end }}
+    ],
+    "allow": [
+      {{- range $i, $v := dig "allow" (list "$defaults") $extraAutoMode }}
+      {{- if $i }},{{ end }}
+      {{ $v | toJson }}
+      {{- end }}
+    ],
+    "soft_deny": [
+      {{- range $i, $v := dig "soft_deny" (list "$defaults") $extraAutoMode }}
+      {{- if $i }},{{ end }}
+      {{ $v | toJson }}
+      {{- end }}
+    ],
+    "hard_deny": [
+      {{- range $i, $v := dig "hard_deny" (list "$defaults") $extraAutoMode }}
+      {{- if $i }},{{ end }}
+      {{ $v | toJson }}
+      {{- end }}
     ]
   },
   "alwaysThinkingEnabled": true,
