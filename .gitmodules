@@ -31,3 +31,6 @@
 [submodule "home/dot_claude/plugins/marketplaces/external_taste-skill"]
 	path = home/dot_claude/plugins/marketplaces/external_taste-skill
 	url = git@github.com:Leonxlnx/taste-skill.git
+[submodule "home/dot_agents/exact_skills/external_prompt-master"]
+	path = home/dot_agents/exact_skills/external_prompt-master
+	url = git@github.com:nidhinjs/prompt-master.git

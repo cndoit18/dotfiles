@@ -94,6 +94,14 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 - For UI or user-facing behavior, exercise the feature from input to output before claiming success.
 - When verification passes and the requested task is complete, stop instead of expanding into new work.
 
+## Stage-End Code Review (Mandatory)
+
+- After completing a stage — defined as: one verifiable goal finished (see Goal-Driven Execution), or one feature done end-to-end, or before declaring the overall task complete — invoke the `code-review` skill with `--effort low` against the current diff. NOT after every individual edit.
+- Run the stage's validator first (see Verification / Definition of Done), then run `code-review --effort low` on the cumulative diff of that stage.
+- Apply fixes ONLY for correctness bugs introduced by your stage's change. NEVER refactor, expand scope, or address pre-existing issues surfaced by the review.
+- Report each finding as `finding → action taken`. If zero findings, state `code-review: 0 findings` and stop.
+- Stop condition for each stage: `code-review` has run AND findings are either fixed or explicitly accepted.
+
 # Comments & Communication
 
 - Explain "why" not "what" in comments
