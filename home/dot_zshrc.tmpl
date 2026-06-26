@@ -37,8 +37,10 @@ alias vi=nvim
 alias vimdiff='nvim -d'
 {{- end }}
 
-# 1Password CLI plugins
-[[ ! -f ~/.config/op/plugins.sh ]] || source ~/.config/op/plugins.sh
+{{ $local := joinPath .chezmoi.homeDir ".config" "op" "plugins.sh" -}}
+{{ if stat $local -}}
+source {{ $local }}
+{{ end -}}
 
 {{- if lookPath "starship" }}
 eval "$(starship init zsh)"
