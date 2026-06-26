@@ -37,11 +37,6 @@ alias vi=nvim
 alias vimdiff='nvim -d'
 {{- end }}
 
-{{ $local := joinPath .chezmoi.homeDir ".config" "op" "plugins.sh" -}}
-{{ if stat $local -}}
-source {{ $local }}
-{{ end -}}
-
 {{- if lookPath "starship" }}
 eval "$(starship init zsh)"
 {{- end }}
