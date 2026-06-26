@@ -34,3 +34,6 @@
 [submodule "home/dot_agents/exact_skills/external_prompt-master"]
 	path = home/dot_agents/exact_skills/external_prompt-master
 	url = git@github.com:nidhinjs/prompt-master.git
+[submodule "home/dot_claude/plugins/marketplaces/external_superpowers"]
+	path = home/dot_claude/plugins/marketplaces/external_superpowers
+	url = git@github.com:obra/superpowers.git
