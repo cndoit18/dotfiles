@@ -11,8 +11,13 @@
 {{- if $i }},{{ end }}
   "{{ $marketplaceName }}": {
     "source": {
+      {{- if eq $marketplaceName "claude-plugins-official" }}
+      "source": "github",
+      "repo": "anthropics/claude-plugins-official"
+      {{- else }}
       "source": "directory",
       "path": "{{ $installPath }}"
+      {{- end }}
     },
     "installLocation": "{{ $installPath }}",
     "lastUpdated": "{{ output `git` `-c` `clock.timezone=UTC` "-C" $path `log` `-1` `--date=format-local:%Y-%m-%dT%H:%M:%S.000Z` `--format=%ad` | trim }}"
