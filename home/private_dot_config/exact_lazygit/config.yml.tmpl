@@ -6,10 +6,10 @@ customCommands:
     loadingText: "opening commitizen commit tool"
     output: terminal
   - key: "G"
-    command: "claude --permission-mode default '/commit-commands:commit'"
-    description: "generate commit message"
+    command: "omp commit"
+    description: "AI commit (Oh My Pi)"
     context: "files"
-    loadingText: "opening commitizen commit tool"
+    loadingText: "generating commit message with Oh My Pi"
     output: terminal
 {{- if lookPath "delta" }}
 git:

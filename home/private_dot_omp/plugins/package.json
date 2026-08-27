@@ -1,0 +1,7 @@
+{
+  "name": "omp-plugins",
+  "private": true,
+  "dependencies": {
+    "omp.nvim": "^1.1.7"
+  }
+}

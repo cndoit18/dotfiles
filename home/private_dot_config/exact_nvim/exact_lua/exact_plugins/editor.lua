@@ -9,7 +9,7 @@ return {
 		opts = {
 			spec = {
 				{ "<leader>f", group = "Find", icon = " " },
-				{ "<leader>a", group = "AI/Claude Code", icon = " " },
+				{ "<leader>a", group = "AI/Oh My Pi", icon = " " },
 				{ "<leader>t", group = "Test", icon = " " },
 				{ "<leader>d", group = "Debug", icon = " " },
 				{ "<leader>g", group = "Git", icon = " " },
