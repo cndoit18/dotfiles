@@ -32,7 +32,6 @@ ZSH_DISABLE_COMPFIX=true
 
 # Application tokens and keys
 export GITHUB_TOKEN={{ .githubToken }}
-export OPENAI_API_KEY="{{ .ai.token }}"
 
 # NVM directory
 export NVM_DIR="$HOME/.config/nvm"
@@ -48,6 +47,7 @@ export LC_ALL=zh_CN.UTF-8
 
 # macOS specific library path
 {{- if eq .chezmoi.os "darwin" }}
+export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 {{- if lookPath "brew" }}
 export DYLD_LIBRARY_PATH="$({{ lookPath "brew"}} --prefix)/lib:$DYLD_LIBRARY_PATH"
 {{- end }}
