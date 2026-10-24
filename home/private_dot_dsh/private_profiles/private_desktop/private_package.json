@@ -1,0 +1,19 @@
+{
+  "name": "dsh-profile-desktop",
+  "private": true,
+  "dsh": {
+    "profile": {
+      "bundles": [
+        "@deepseek-ai/dsh-base",
+        "@deepseek-ai/dsh-web-app",
+        "@deepseek-ai/dsh-experimental-auto-review",
+        "@anysearch/anysearch-dsh",
+        "@deepseek-ai/dsh-experimental-tool-worktree",
+        "@deepseek-ai/dsh-experimental-plugin-market-bundle"
+      ]
+    }
+  },
+  "dependencies": {
+    "@anysearch/anysearch-dsh": "^0.1.8"
+  }
+}
