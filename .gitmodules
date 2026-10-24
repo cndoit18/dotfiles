@@ -34,3 +34,6 @@
 [submodule "home/dot_agents/exact_skills/external_prompt-master"]
 	path = home/dot_agents/exact_skills/external_prompt-master
 	url = git@github.com:nidhinjs/prompt-master.git
+[submodule "home/dot_agents/exact_skills/external_web-to-design-md"]
+	path = home/dot_agents/exact_skills/external_web-to-design-md
+	url = https://github.com/Paidax01/web-to-design-md.git
