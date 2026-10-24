@@ -102,6 +102,10 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 - Report each finding as `finding → action taken`. If zero findings, state `code-review: 0 findings` and stop.
 - Stop condition for each stage: `code-review` has run AND findings are either fixed or explicitly accepted.
 
+# Design System
+
+- When the workspace contains a `DESIGN.md`, read it before building or modifying UI and treat its design tokens (colors, typography, spacing, radius, component styling) as the source of truth for that workspace's visual language.
+
 # Comments & Communication
 
 - Explain "why" not "what" in comments
