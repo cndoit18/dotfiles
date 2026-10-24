@@ -8,12 +8,19 @@
         "@deepseek-ai/dsh-web-app",
         "@deepseek-ai/dsh-experimental-auto-review",
         "@anysearch/anysearch-dsh",
-        "@deepseek-ai/dsh-experimental-tool-worktree",
-        "@deepseek-ai/dsh-experimental-plugin-market-bundle"
+        "dsh-better-sidebar",
+        "dshmarket",
+        "@cerbur/clutch-dsh-worktree",
+        "@xbzbing/dsh-git-panel",
+        "@deepseek-ai/dsh-experimental-voice-input-bundle"
       ]
     }
   },
   "dependencies": {
-    "@anysearch/anysearch-dsh": "^0.1.8"
+    "@anysearch/anysearch-dsh": "^0.1.8",
+    "@cerbur/clutch-dsh-worktree": "0.1.18",
+    "@xbzbing/dsh-git-panel": "1.9.1",
+    "dsh-better-sidebar": "0.28.0",
+    "dshmarket": "1.69.0"
   }
 }

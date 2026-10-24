@@ -8,9 +8,31 @@
       kimi-coding:
         apiKeyEnv: KIMI_CODING_API_KEY
         models:
-          - id: k3.1-pro
-            name: k3.1-pro
+          - id: k3
+            name: Kimi K3
             contextWindow: 1048576
+            maxTokens: 131072
+            input:
+              - text
+              - image
+          - id: k3-256k
+            name: Kimi K3-256K
+            contextWindow: 262144
+            maxTokens: 131072
+            input:
+              - text
+              - image
+          - id: kimi-for-coding
+            name: kimi-for-coding
+            contextWindow: 1048576
+            maxTokens: 32768
+            input:
+              - text
+              - image
+          - id: kimi-for-coding-highspeed
+            name: Kimi For Coding HighSpeed
+            contextWindow: 262144
+            maxTokens: 32768
             input:
               - text
               - image
@@ -27,7 +49,8 @@
   name: "@deepseek-ai/dsh-agent-default-model"
   config:
     provider: kimi-coding
-    model: k3.1-pro
+    model: kimi-for-coding
+    reasoningEffort: max
 - id: ui-settings-account
   name: "@deepseek-ai/dsh-client-ui-settings-account"
   config:
@@ -61,3 +84,36 @@
   config:
     indexes:
       - https://cdn.jsdelivr.net/npm/dsh-plugin-catalog/index.json
+- id: better-sidebar
+  name: dsh-better-sidebar
+  config:
+    mobileNoAutoOpen: true
+    agentOpenTools: false
+    editorExplorer: true
+    customCss: ""
+    tabsEnabled:
+      git: false
+      dsh-ide-git:panel: true
+      sidechat: false
+      diff: false
+      editor: true
+    pluginSettings:
+      editor:
+        openWithPluginTargets: false
+        openWith:
+          sshHost: ""
+          customEditors: []
+          pinned: []
+- id: worktree-space
+  name: dsh-worktree-space
+  config:
+    panelEntry: hide
+- id: git-panel
+  name: "@xbzbing/dsh-git-panel"
+  config:
+    timeoutMs: 8000
+    maxBytes: 4194304
+    maxChanges: 1000
+    refreshIntervalMs: 30000
+    placement: tab
+    defaultDiffView: unified
