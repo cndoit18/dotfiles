@@ -39,9 +39,12 @@
 
 ## Before Writing Code
 
-- Load `software-design-philosophy-skill` skill — evaluate module depth, information hiding, complexity, and error handling before implementing
-- Use LSP operations (hover, goToDefinition, findReferences) to understand existing code before modifying it
-- Use `Context7` MCP for library/API documentation, code generation, setup, and configuration
+- For architecture, module decomposition, refactoring, or error-handling design, load the `software-design-philosophy` skill.
+- Use `glob` for file discovery, `grep` for content searches, and `read` for inspection. Read an existing file before editing it and prefer `edit` for targeted changes.
+- When only `run_code` is exposed, invoke declared tools through it rather than assuming direct tool calls exist.
+- Use repository documentation and installed source to verify local APIs and versions. Use `web_search` and `web_fetch` for current official documentation when needed.
+- For an unfamiliar CLI or uncertain flags, check local `--help` or documentation first; do not run discovery probes for every familiar command.
+- Use only tools and skills available in the current session. If a capability is unavailable, say so and use an available fallback; never claim to have used it.
 - Do not use agents for narrow tasks unless the user asks or the task genuinely requires broad parallel research.
 
 ## Simplicity First
@@ -92,15 +95,14 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 - Validate Go with `go test` for touched packages.
 - Validate config manifests with their repo-specific render/validate command.
 - For UI or user-facing behavior, exercise the feature from input to output before claiming success.
+- For Markdown or instruction files, check heading/fence structure and verify that referenced tools and skills are available in the current session.
 - When verification passes and the requested task is complete, stop instead of expanding into new work.
 
-## Stage-End Code Review (Mandatory)
+## Final Diff Review
 
-- After completing a stage — defined as: one verifiable goal finished (see Goal-Driven Execution), or one feature done end-to-end, or before declaring the overall task complete — invoke the `code-review` skill with `--effort low` against the current diff. NOT after every individual edit.
-- Run the stage's validator first (see Verification / Definition of Done), then run `code-review --effort low` on the cumulative diff of that stage.
-- Apply fixes ONLY for correctness bugs introduced by your stage's change. NEVER refactor, expand scope, or address pre-existing issues surfaced by the review.
-- Report each finding as `finding → action taken`. If zero findings, state `code-review: 0 findings` and stop.
-- Stop condition for each stage: `code-review` has run AND findings are either fixed or explicitly accepted.
+- After validation and before finishing, inspect the final diff (`git diff -- <touched paths>` in a Git repository) for correctness, scope, and accidental changes.
+- Confirm every changed line traces to the request and no generated files, secrets, or unrelated edits were included.
+- Fix only problems introduced by your changes; do not expand the task during review.
 
 # Comments & Communication
 
