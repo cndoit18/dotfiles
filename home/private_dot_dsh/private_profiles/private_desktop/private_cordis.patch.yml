@@ -114,20 +114,14 @@
         })
         const dshModels = models.map(toModel)
         const common = {
-          apiKeyEnv: 'MAGPIE_GATEWAY_KEY',
+          apiKeyEnv: 'OPENAI_API_KEY',
           baseURL,
+          api: 'openai-responses',
         }
         return {
-          magpie: {
+          'mix-gateway': {
             ...common,
-            displayName: 'Magpie',
-            api: 'openai-completions',
-            models: dshModels,
-          },
-          'magpie-responses': {
-            ...common,
-            displayName: 'Magpie · Responses',
-            api: 'openai-responses',
+            displayName: '聚合网关',
             models: dshModels,
           },
         }
