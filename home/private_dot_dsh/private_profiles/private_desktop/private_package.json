@@ -12,13 +12,15 @@
         "dshmarket",
         "@cerbur/clutch-dsh-worktree",
         "@xbzbing/dsh-git-panel",
-        "@deepseek-ai/dsh-experimental-voice-input-bundle"
+        "@deepseek-ai/dsh-experimental-voice-input-bundle",
+        "@dshforge/agent-plugins"
       ]
     }
   },
   "dependencies": {
     "@anysearch/anysearch-dsh": "^0.1.8",
     "@cerbur/clutch-dsh-worktree": "0.1.18",
+    "@dshforge/agent-plugins": "^0.1.1",
     "@xbzbing/dsh-git-panel": "1.9.1",
     "dsh-better-sidebar": "0.28.0",
     "dshmarket": "1.69.0"
