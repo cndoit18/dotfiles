@@ -5,50 +5,186 @@
   name: "@deepseek-ai/dsh-llm-pi-ai"
   config:
     providers:
-      kimi-coding:
-        apiKeyEnv: KIMI_CODING_API_KEY
+      magpie:
+        displayName: Magpie
+        apiKeyEnv: MAGPIE_GATEWAY_KEY
+        api: openai-completions
+        baseURL: http://127.0.0.1:3425/v1
         models:
-          - id: k3
-            name: Kimi K3
+          - id: auto/ark-code-latest
+            name: ark-code-latest · routing group
+            input: [text, image]
+          - id: auto/doubao-seed-evolving
+            name: doubao-seed-evolving · routing group
+            contextWindow: 256000
+            maxTokens: 64000
+            input: [text, image]
+            reasoningEfforts:
+              "off": none
+              low: low
+              high: high
+          - id: auto/doubao-seed-2.1-pro
+            name: doubao-seed-2.1-pro · routing group
+            contextWindow: 256000
+            maxTokens: 64000
+            input: [text, image]
+          - id: auto/doubao-seed-2.1-lite
+            name: doubao-seed-2.1-lite · routing group
+            input: [text, image]
+          - id: auto/doubao-seed-2.1-turbo
+            name: doubao-seed-2.1-turbo · routing group
+            contextWindow: 256000
+            maxTokens: 64000
+            input: [text, image]
+            reasoningEfforts:
+              "off": none
+              low: low
+              high: high
+          - id: auto/doubao-seed-2.0-mini
+            name: doubao-seed-2.0-mini · routing group
+            contextWindow: 256000
+            maxTokens: 32000
+            input: [text, image]
+            reasoningEfforts:
+              low: low
+              medium: medium
+              high: high
+          - id: auto/minimax-m3
+            name: minimax-m3 · routing group
             contextWindow: 1048576
+            maxTokens: 458752
+            input: [text, image]
+          - id: auto/glm-5.3
+            name: glm-5.3 · routing group
+            contextWindow: 1000000
             maxTokens: 131072
-            input:
-              - text
-              - image
-          - id: k3-256k
-            name: Kimi K3-256K
-            contextWindow: 262144
-            maxTokens: 131072
-            input:
-              - text
-              - image
-          - id: kimi-for-coding
-            name: kimi-for-coding
-            contextWindow: 1048576
-            maxTokens: 32768
-            input:
-              - text
-              - image
-          - id: kimi-for-coding-highspeed
-            name: Kimi For Coding HighSpeed
-            contextWindow: 262144
-            maxTokens: 32768
-            input:
-              - text
-              - image
-          - id: k3.1-pro
-            name: Kimi K3.1 Pro
-            contextWindow: 1048576
-            input:
-              - text
-              - image
-            maxTokens: 131072
+            input: [text, image]
             reasoningEfforts:
               low: low
               high: high
               max: max
-            compat:
-              forceAdaptiveThinking: true
+          - id: auto/glm-5.3-flash
+            name: glm-5.3-flash · routing group
+            contextWindow: 1000000
+            maxTokens: 131072
+            input: [text, image]
+            reasoningEfforts:
+              low: low
+              high: high
+              max: max
+          - id: auto/deepseek-v4.1-flash
+            name: deepseek-v4.1-flash · routing group
+            contextWindow: 1048576
+            maxTokens: 384000
+            input: [text, image]
+            reasoningEfforts:
+              low: low
+              high: high
+              max: max
+          - id: auto/deepseek-v4-flash
+            name: deepseek-v4-flash · routing group
+            contextWindow: 1000000
+            maxTokens: 384000
+            input: [text, image]
+            reasoningEfforts:
+              low: low
+              high: high
+              max: max
+          - id: auto/deepseek-v4-pro
+            name: deepseek-v4-pro · routing group
+            contextWindow: 1000000
+            maxTokens: 384000
+            input: [text, image]
+            reasoningEfforts:
+              low: low
+              high: high
+              max: max
+          - id: auto/kimi-k2.7-code
+            name: kimi-k2.7-code · routing group
+            contextWindow: 262144
+            maxTokens: 65536
+            input: [text, image]
+          - id: auto/kimi-k2.8-preview
+            name: kimi-k2.8-preview · routing group
+            contextWindow: 1048576
+            maxTokens: 32768
+            input: [text, image]
+            reasoningEfforts:
+              "off": none
+              low: low
+              high: high
+              max: max
+          - id: auto/kimi-k3
+            name: kimi-k3 · routing group
+            contextWindow: 1048576
+            maxTokens: 131072
+            input: [text, image]
+            reasoningEfforts:
+              low: low
+              high: high
+              max: max
+          - id: auto/kimi-k3.1-pro
+            name: Kimi K3.1 Pro · routing group
+            contextWindow: 1048576
+            maxTokens: 458752
+            input: [text, image]
+            reasoningEfforts:
+              low: low
+              high: high
+              max: max
+          - id: kimi/kimi-for-coding
+            name: K2.8 Preview · Kimi Code
+            contextWindow: 1048576
+            maxTokens: 32768
+            input: [text, image]
+            reasoningEfforts:
+              "off": none
+              low: low
+              high: high
+              max: max
+          - id: kimi/kimi-for-coding-highspeed
+            name: K2.7 Code Highspeed · Kimi Code
+            contextWindow: 262144
+            maxTokens: 32768
+            input: [text, image]
+          - id: kimi/k3
+            name: K3 · Kimi Code
+            contextWindow: 1048576
+            maxTokens: 131072
+            input: [text, image]
+            reasoningEfforts:
+              "off": none
+              low: low
+              high: high
+              max: max
+          - id: kimi/k3-256k
+            name: K3-256k · Kimi Code
+            contextWindow: 262144
+            maxTokens: 65536
+            input: [text, image]
+            reasoningEfforts:
+              "off": none
+              low: low
+              high: high
+              max: max
+          - id: kimi/k3.1-pro
+            name: K3.1 Pro · Kimi Code
+            contextWindow: 1048576
+            maxTokens: 131072
+            input: [text, image]
+            reasoningEfforts:
+              low: low
+              high: high
+              max: max
+          - id: kimi/k3.1-pro-highspeed
+            name: K3.1 Pro Highspeed · Kimi Code
+            contextWindow: 1048576
+            maxTokens: 131072
+            input: [text, image]
+            reasoningEfforts:
+              low: low
+              high: high
+              max: max
 - id: ui-chat
   name: "@deepseek-ai/dsh-client-ui-chat"
   config:
@@ -58,12 +194,10 @@
   name: "@deepseek-ai/dsh-client-ui-settings"
   config:
     enabled: true
-- id: agent-default-model
-  name: "@deepseek-ai/dsh-agent-default-model"
+- id: agent-default-model # magpie
   config:
-    provider: kimi-coding
-    model: kimi-for-coding
-    reasoningEffort: max
+    provider: magpie
+    model: "auto/glm-5.3"
 - id: ui-settings-account
   name: "@deepseek-ai/dsh-client-ui-settings-account"
   config:
@@ -130,3 +264,14 @@
     refreshIntervalMs: 30000
     placement: tab
     defaultDiffView: unified
+- id: web-search-deepseek # magpie
+  name: "@deepseek-ai/dsh-web-search-deepseek"
+  config:
+    apiKeyEnv: MAGPIE_GATEWAY_KEY
+    baseURL: "http://127.0.0.1:3425/v1"
+    model: "auto/glm-5.3"
+- id: web
+  name: "@deepseek-ai/dsh-web"
+  config:
+    searchProvider: deepseek-official
+    fetchProvider: http
