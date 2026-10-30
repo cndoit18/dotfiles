@@ -77,11 +77,6 @@
     refreshIntervalMs: 30000
     placement: tab
     defaultDiffView: unified
-- id: web
-  name: "@deepseek-ai/dsh-web"
-  config:
-    searchProvider: deepseek-official
-    fetchProvider: http
 - id: agent-preset-registry
   name: "@deepseek-ai/dsh-agent-preset-registry"
   config:
@@ -126,3 +121,17 @@
           },
         }
       })()
+- id: ui-settings-general
+  name: "@deepseek-ai/dsh-client-ui-settings-general"
+  config:
+    welcomeNoticeVersion: 2026-09-28.1
+- id: web-deepseek-api
+  name: "@deepseek-ai/dsh-web-deepseek-api"
+  config:
+    apiKeyEnv: DEEPSEEK_API_KEY
+    count: 50
+- id: web
+  name: "@deepseek-ai/dsh-web"
+  config:
+    searchProvider: deepseek-search-api
+    fetchProvider: deepseek-fetch-api
