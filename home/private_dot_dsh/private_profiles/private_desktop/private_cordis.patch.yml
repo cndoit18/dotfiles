@@ -25,6 +25,11 @@
   name: "@deepseek-ai/dsh-session-log-deepseek"
   config:
     enabled: false
+- id: compaction-basic
+  name: "@deepseek-ai/dsh-compaction-basic"
+  config:
+    auto: true
+    thresholdRatio: 0.4
 - id: permission
   name: "@deepseek-ai/dsh-permission-presets"
   config:
