@@ -140,3 +140,9 @@
   config:
     searchProvider: deepseek-search-api
     fetchProvider: deepseek-fetch-api
+- id: agent-default-model
+  name: "@deepseek-ai/dsh-agent-default-model"
+  config:
+    provider: mix-gateway
+    model: auto/kimi-k3.1-pro
+    reasoningEffort: max
