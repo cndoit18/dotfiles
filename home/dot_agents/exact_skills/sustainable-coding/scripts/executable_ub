@@ -1,0 +1,9 @@
+#!/usr/bin/env python3
+"""Locate the implementation when this command is invoked through a symlink."""
+
+import os
+from pathlib import Path
+import sys
+
+implementation = Path(__file__).resolve().with_name("ub.py")
+os.execv(sys.executable, [sys.executable, str(implementation), *sys.argv[1:]])
