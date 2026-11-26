@@ -21,6 +21,7 @@ description: 用读者型文本（Reader-Based Prose）和修辞结构理论（R
 - 策划或写作前：读 [成品 DNA](references/guides/document-dna.md) 与 [语言与提炼](references/guides/voice-and-copy.md)。
 - 选择文档结构时：读 [文档原型](references/guides/document-archetypes.md)。
 - 组织复杂逻辑、机制或图示时：读 [语篇结构与图示](references/guides/structure-and-visuals.md)。
+- 绘制或重画架构图时：读 [架构图绘制与视觉验收](references/guides/architecture-diagrams.md)，并查看 [版式样例](assets/architecture-style-example.png)。单页架构图优先使用 [D2 样式类](assets/d2-architecture-style.d2) 和 [D2 渲染脚本](scripts/render_d2.sh)；核心图必须实际渲染并打开检查，发现文字、连线或布局问题时必须修订后再渲染。
 - 成稿或改写前：读 [写作与校准工作流](references/guides/calibration-workflow.md)。用户未另附范文时，直接使用本 Skill 的内置真人范文。
 - 交付前：执行 [质检清单](references/guides/qa-checklist.md)。
 
