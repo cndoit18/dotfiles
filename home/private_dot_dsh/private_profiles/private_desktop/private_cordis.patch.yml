@@ -102,7 +102,6 @@
           id: model.id,
           name: model.magpie_label,
           ...(model.context_window ? { contextWindow: model.context_window } : {}),
-          ...(model.max_output_tokens ? { maxTokens: model.max_output_tokens } : {}),
           ...(model.modalities ? {
             input: model.modalities.input.filter((input) => input === 'text' || input === 'image'),
           } : {}),
